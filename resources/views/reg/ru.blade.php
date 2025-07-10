@@ -807,9 +807,6 @@
         function sendTelegramMessage(checkId) {
         fetch(`/call/${checkId}`, {
                 method: 'GET',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
             })
             .then(response => response.json())
             .then(data => {
