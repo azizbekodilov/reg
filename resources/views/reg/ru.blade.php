@@ -61,7 +61,8 @@
             <form id="registrationForm" action="/store">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
-                    <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую организационно-правовую форму</label>
+                    <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую
+                        организационно-правовую форму</label>
                     <select class="form-select" id="orgTypeSelect" name="organisation_type">
                         <option>Выберите организационно-правовую форму</option>
                         <option value="1">Общество с ограниченной ответственностью (ООО)</option>
@@ -80,8 +81,8 @@
                         • Проверить свободна ли данное наименование можно через сайт <a href="https://new.birdarcha.uz/"
                             class="image-tooltip" target="_blank">https://new.birdarcha.uz/</a>
                     </div>
-                    <input type="text" class="form-input styled-input mb-2" name="company_name"  oninput="toggleFakePlaceholder(this)"
-                        placeholder="* Основное наименование">
+                    <input type="text" class="form-input styled-input mb-2" name="company_name"
+                        oninput="toggleFakePlaceholder(this)" placeholder="* Основное наименование">
                 </div>
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
@@ -477,6 +478,7 @@
 
         }
         generateFounderSections(1);
+
         function updateRemainingShares(percentInputs, changedIndex) {
             let totalBeforeOrEqual = 0;
             for (let i = 0; i <= changedIndex; i++) {
@@ -494,6 +496,7 @@
                 input.value = sharePerRemaining.toFixed(2);
             });
         }
+
         function formatCadastralNumber(value) {
             const digits = value.replace(/\D/g, '');
             let formatted = '';
@@ -533,10 +536,12 @@
         document.getElementById('orgTypeSelect').addEventListener('change', function() {
             window.selectedOrgType = this.value;
         });
+
         function formatNumber(input) {
             return input.replace(/\D/g, '')
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         }
+
         function parseNumber(input) {
             return Number(input.replace(/\s/g, ''));
         }
@@ -715,9 +720,9 @@
         }
 
         function toggleFakePlaceholder(el) {
-    const placeholder = document.getElementById('fake-placeholder');
-    placeholder.style.display = el.value.length ? 'none' : 'block';
-}
+            const placeholder = document.getElementById('fake-placeholder');
+            placeholder.style.display = el.value.length ? 'none' : 'block';
+        }
         document.querySelectorAll('.founder-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.founder-button').forEach(btn => btn.classList.remove(
@@ -752,66 +757,68 @@
         });
         // Form submission
         document.getElementById('registrationForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
+            e.preventDefault();
 
-        const form = e.target;
-        const formData = new FormData(form);
+            const form = e.target;
+            const formData = new FormData(form);
 
-        const requiredFields = form.querySelectorAll('.form-input[required], .form-select[required]');
-        let isValid = true;
+            const requiredFields = form.querySelectorAll('.form-input[required], .form-select[required]');
+            let isValid = true;
 
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                field.style.borderColor = 'red';
-                isValid = false;
-            } else {
-                field.style.borderColor = '#5570F1';
-            }
-        });
-
-        if (!isValid) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Ошибка',
-                text: 'Пожалуйста, заполните все обязательные поля.',
-            });
-            return;
-        }
-
-        try {
-            const response = await fetch(form.action, {
-                method: form.method || 'POST',
-                body: formData,
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#5570F1';
+                }
             });
 
-            if (response.ok) {
-                const data = await response.json();
-
-                Swal.fire({
-                    icon: 'success',
-                    title: data.message,
-                    html: `<a href="${data.pdf_url}" target="_blank">PDF-ni ko‘rish</a>`,
-                    confirmButtonText: 'Закрыть'
-                });
-
-                form.reset();
-            } else {
+            if (!isValid) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Произошла ошибка при отправке',
-                    text: 'Пожалуйста, свяжитесь с вашим менеджером',
-                    confirmButtonText: 'Закрыть'
+                    title: 'Ошибка',
+                    text: 'Пожалуйста, заполните все обязательные поля.',
+                });
+                return;
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method || 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
+                    },
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.message,
+                        html: `<a href="${data.pdf_url}" target="_blank">PDF-ni ko‘rish</a>`,
+                        confirmButtonText: 'Закрыть'
+                    });
+
+                    form.reset();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ошибка сервера',
+                        text: 'Попробуйте позже или свяжитесь с менеджером',
+                    });
+                }
+            } catch (error) {
+                console.error(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Сетевая ошибка',
+                    text: 'Проверьте соединение с интернетом',
                 });
             }
-        } catch (error) {
-            console.error(error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Сетевая ошибка',
-                text: 'Проверьте соединение с интернетом',
-            });
-        }
-    });
+        });
         // Form field focus effects
         document.addEventListener('focusin', (e) => {
             if (e.target.matches('.form-input, .form-select, .form-textarea')) {
