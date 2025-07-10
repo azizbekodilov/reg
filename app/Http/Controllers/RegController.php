@@ -21,18 +21,18 @@ class RegController extends Controller
     {
         $id = request()->query('id');
         $customer_id = request()->query('customer_id');
-        $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
+        $json = Http::get("https://new.legaldesk.uz/csellers/" . $id)->json();
         if ($json != null) {
             # code...
             $manager = $json['name'];
             $avatar = '/img/avatar.jpg';
-            $avatar = '/img/'.$json['avatar2'];
+            $avatar = '/img/' . $json['avatar2'];
         }
-        if ($lang == "en"){
+        if ($lang == "en") {
             return view('reg.en', compact('id', 'customer_id', 'manager', 'avatar'));
-        }else if ($lang == "uz"){
+        } else if ($lang == "uz") {
             return view('reg.uz', compact('id', 'customer_id', 'manager', 'avatar'));
-        }else{
+        } else {
             return view('reg.ru', compact('id', 'customer_id', 'manager', 'avatar'));
         }
     }
@@ -50,27 +50,45 @@ class RegController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->lang == 'en'){
+        if ($request->lang == 'en') {
             $pdf = Pdf::loadView('reg.pdf.en', compact('request'));
-        }elseif ($request->lang == 'uz'){
+        } elseif ($request->lang == 'uz') {
             $pdf = Pdf::loadView('reg.pdf.uz', compact('request'));
-        }else{
+        } else {
             $pdf = Pdf::loadView('reg.pdf.ru', compact('request'));
         }
-        $url = "ariza/".Carbon::now()->format("Y_m_d_H_i_s").".pdf";
+        $url = "ariza/" . Carbon::now()->format("Y_m_d_H_i_s") . ".pdf";
         Storage::put($url, $pdf->output());
         Log::info($url);
         sleep(1);
+        Http::post("https://new.legaldesk.uz/save_data", [
+            'customer_service_id' => $request->customer_service_id,
+            'organisation_type' => $request->organisation_type,
+            'company_name' => $request->company_name,
+            'type_of_activity' => $request->type_of_activity,
+            'juridical_name' => $request->juridical_name,
+            'cadastr_number' => $request->cadastr_number,
+            'tax_type' => $request->tax_type,
+            'capital' => $request->capital,
+            'customer_service_founder_id' => 10,
+            'head_name' => $request->head_name,
+            'head_phone' => $request->head_phone,
+            'head_mail' => $request->head_mail,
+            'organisation_phone' => $request->organisation_phone,
+            'organisation_mail' => $request->organisation_mail,
+            'note' => $request->note,
+        ]);
         if ($url) {
             $checkCustomerServiceId = $request->input("client_id");
             Http::post("https://new.legaldesk.uz/save_pdf", [
                 'url' => 'link',
                 'customer_service_id' => $checkCustomerServiceId,
             ]);
-            Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendDocument",
+            Http::get(
+                "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendDocument",
                 [
-                    'chat_id'=>'5295550547',
-                    'document'=> 'https://reg.legalact.uz/storage/' . $url,
+                    'chat_id' => '5295550547',
+                    'document' => 'https://reg.legalact.uz/storage/' . $url,
                 ]
             );
         }
@@ -83,18 +101,19 @@ class RegController extends Controller
     public function call($checkId, $customer_id)
     {
         // $this->customerId = $customer_id;
-        $json = Http::get("https://new.legaldesk.uz/csellers/".$checkId)->json();
+        $json = Http::get("https://new.legaldesk.uz/csellers/" . $checkId)->json();
         Http::post("https://new.legaldesk.uz/accept_task", [
             'customer_id' => $customer_id,
             'user_id' => $checkId,
         ]);
         $chat_id = $json['chat_id'] ?? null;
         $name = $json['name'] ?? 'Пользователь';
-        Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
-                [
-                    'chat_id'=> -1001285835091,
-                    'text'=>  '🔔 '.$name.'! Ваш клиент под ID ' . $customer_id . ' обращается к вам за помощью в регистрации заявки.',
-                ]
+        Http::get(
+            "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
+            [
+                'chat_id' => -1001285835091,
+                'text' =>  '🔔 ' . $name . '! Ваш клиент под ID ' . $customer_id . ' обращается к вам за помощью в регистрации заявки.',
+            ]
         );
         return response()->json(['message' => 'Скоро с вами свяжутся.']);
     }
