@@ -26,7 +26,7 @@
             <div class="call-wrapper">
                 <div class="call-buton">
                     <button class="cc-calto-action-ripple" onclick="sendTelegramMessage({{$id}})">
-                        <img src="/{{$avatar}}" alt="">
+                        <img src="http://reg.legaldesk.uz/img/{{$avatar}}" alt="">
                     </button>
                 </div>
                 <div style="margin-top: 1rem;text-align:center;font-size:12px">
