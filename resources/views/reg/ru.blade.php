@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <form id="registrationForm" action="/store">
+            <form id="registrationForm" action="/store" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
