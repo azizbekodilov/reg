@@ -91,7 +91,7 @@ class RegController extends Controller
         $name = $json['name'];
         Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
                 [
-                    'chat_id'=>$chat_id,
+                    'chat_id'=> -1001285835091,
                     'text'=>  '🔔 '.$name.'! Ваш клиент Максим обращается к вам за помощью в регистрации заявки.',
                 ]
         );
