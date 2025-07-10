@@ -7,7 +7,7 @@
 
     body {
         font-family: "Inter", sans-serif;
-        background: #f8f9fa;
+        background: #ffffff;
         color: #333;
         line-height: 1.6;
     }
@@ -617,5 +617,88 @@
 
     .fs-12 {
         font-size: 12px;
+    }
+
+    .call-wrapper {
+        z-index: 99999;
+        position: fixed;
+        left: 1rem;
+        top: 8rem;
+        background: #ffffff;
+
+    }
+
+    .call-buton .cc-calto-action-ripple {
+        background: #000000;
+        width: 10rem;
+        height: 10rem;
+        border-radius: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #ffffff;
+        -webkit-animation: cc-calto-action-ripple 0.6s linear infinite;
+        animation: cc-calto-action-ripple 0.6s linear infinite;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        justify-items: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        text-decoration: none;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .call-buton img {
+        width: 10rem;
+        height: 10rem;
+        object-fit: cover;
+        background-position: center;
+
+
+    }
+
+    .call-buton .cc-calto-action-ripple i {
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+        font-size: 2.2rem;
+    }
+
+    .call-buton .cc-calto-action-ripple:hover i {
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+
+    @-webkit-keyframes cc-calto-action-ripple {
+        0% {
+            -webkit-box-shadow: 0 4px 10px rgba(43, 41, 37, 0.2), 0 0 0 0 rgba(236, 0, 0, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 139, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(35, 34, 34, 0.2), 0 0 0 0 rgba(236, 0, 0, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 139, 0, 0.2);
+        }
+
+        100% {
+            -webkit-box-shadow: 0 4px 10px rgba(236, 139, 0, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 0, 0, 0.2), 0 0 0 20px rgba(236, 139, 0, 0);
+            box-shadow: 0 4px 10px rgba(236, 139, 0, 0.2), 0 0 0 5px rgba(236, 139, 0, 0.2), 0 0 0 10px rgba(236, 139, 0, 0.2), 0 0 0 20px rgba(236, 139, 0, 0);
+        }
+    }
+
+    @keyframes cc-calto-action-ripple {
+        0% {
+            -webkit-box-shadow: 0 4px 10px rgba(236, 139, 0, 0.2), 0 0 0 0 rgba(20, 17, 13, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(236, 139, 0, 0.2), 0 0 0 0 rgba(236, 0, 0, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 0, 0, 0.2);
+        }
+
+        100% {
+            -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 0, 0, 0.2), 0 0 0 20px rgba(236, 139, 0, 0);
+            box-shadow: 0 4px 10px rgba(20, 20, 20, 0.2), 0 0 0 5px rgba(236, 0, 0, 0.2), 0 0 0 10px rgba(236, 0, 0, 0.2), 0 0 0 20px rgba(236, 139, 0, 0);
+        }
+    }
+
+    span.num {
+        position: absolute;
+        color: #000000;
+        bottom: -10%;
     }
 </style>

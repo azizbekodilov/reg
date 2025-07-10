@@ -23,9 +23,16 @@
 <body>
     <div class="container">
         <div class="main-content">
-            <button class="seller" onclick="sendTelegramMessage(1)">
-                <img src="http://127.0.0.1:8000/img/ekaterina_sibaeva.png" alt="">
-            </button>
+            <div class="call-wrapper">
+                <div class="call-buton">
+                    <button class="cc-calto-action-ripple" onclick="sendTelegramMessage({{$id}})">
+                        <img src="http://127.0.0.1:8000/img/ekaterina_sibaeva.png" alt="">
+                    </button>
+                </div>
+                <div style="margin-top: 1rem;text-align:center;font-size:12px">
+                    Обратиться за помощью <br> к менеджеру.
+                </div>
+            </div>
             <style>
                 .seller {
                     position: fixed;
@@ -780,14 +787,30 @@
                 });
 
                 if (response.ok) {
-                    alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Заявка успешно отправлена!',
+                        text: 'Мы свяжемся с вами в ближайшее время',
+                        confirmButtonText: 'Закрыть'
+                    });
                     form.reset(); // optional: clear form
                 } else {
-                    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Произошла ошибка при отправке',
+                        text: 'Пожалуйста, свяжитесь с вашим менеджером',
+                        confirmButtonText: 'Закрыть'
+                    });
                 }
             } catch (error) {
                 console.error('Ошибка:', error);
-                alert('Сетевая ошибка. Пожалуйста, проверьте соединение и повторите попытку.');
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Сетевая ошибка при отправке',
+                        text: 'Пожалуйста, проверьте соединение и повторите попытку.',
+                        confirmButtonText: 'Закрыть'
+                    });
+
             }
         });
         // Form field focus effects
