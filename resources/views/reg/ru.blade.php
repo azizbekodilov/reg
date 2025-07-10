@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <div class="main-content">
-            <button class="seller" onclick="href='/call/1'">
+            <button class="seller" onclick="location.href='/call/1';">
                 <img src="http://127.0.0.1:8000/img/ekaterina_sibaeva.png" alt="">
             </button>
             <style>
