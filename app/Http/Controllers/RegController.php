@@ -13,7 +13,7 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang)
+    public function index()
     {
         // $id = request()->query('id');
         $id = 1;
