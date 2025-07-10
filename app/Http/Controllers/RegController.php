@@ -79,7 +79,7 @@ class RegController extends Controller
         ]);
         Log::info($data);
         return response()->json([
-            'message' => 'Заявка успешно отправлена!',
+            'message' => $data,
             'pdf_url' => asset('storage/' . $url)
         ], 200);
     }
