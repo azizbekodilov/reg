@@ -72,8 +72,8 @@ class RegController extends Controller
         $chat_id = $json['chat_id'];
         $data = Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendDocument",
                 [
-                    'chat_id'=>'5295550547',
-                    'document'=> 'https://reg.legalact.uz/storage/' . $url,
+                    'chat_id'=>$chat_id,
+                    'text'=> 'https://reg.legalact.uz/storage/',
                 ]
         );
         return $data;
