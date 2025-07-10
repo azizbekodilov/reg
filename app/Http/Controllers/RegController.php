@@ -77,7 +77,6 @@ class RegController extends Controller
                     'text'=> 'https://reg.legalact.uz/storage/',
                 ]
         );
-        return $data;
         Alert::alert('Title', 'Message', 'Type');
     }
 
