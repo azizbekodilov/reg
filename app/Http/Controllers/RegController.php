@@ -18,12 +18,13 @@ class RegController extends Controller
         $id = request()->query('id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
         $manager = $json['name'];
+        $avatar = '/img/'.$json['avatar2'];
         if ($lang == "en"){
-            return view('reg.en', compact('id', 'manager'));
+            return view('reg.en', compact('id', 'manager', 'avatar'));
         }else if ($lang == "uz"){
-            return view('reg.uz', compact('id', 'manager'));
+            return view('reg.uz', compact('id', 'manager', 'avatar'));
         }else{
-            return view('reg.ru', compact('id', 'manager'));
+            return view('reg.ru', compact('id', 'manager', 'avatar'));
         }
     }
 

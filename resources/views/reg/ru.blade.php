@@ -26,7 +26,7 @@
             <div class="call-wrapper">
                 <div class="call-buton">
                     <button class="cc-calto-action-ripple" onclick="sendTelegramMessage({{$id}})">
-                        <img src="http://127.0.0.1:8000/img/ekaterina_sibaeva.png" alt="">
+                        <img src="http://127.0.0.1:8000/{{$avatar}}" alt="">
                     </button>
                 </div>
                 <div style="margin-top: 1rem;text-align:center;font-size:12px">
