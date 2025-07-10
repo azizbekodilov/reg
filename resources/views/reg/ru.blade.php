@@ -806,11 +806,7 @@
 
         function sendTelegramMessage(checkId) {
             fetch('/send-telegram-message', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
+                    method: 'GET',
                     body: JSON.stringify({
                         check_id: checkId
                     })
