@@ -16,7 +16,6 @@ class RegController extends Controller
     public function index($lang, $id = null)
     {
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
-        $chat_id = $json['chat_id'];
         $manager = $json;
         $id = request()->query('id');
         if ($lang == "en"){
