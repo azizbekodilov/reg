@@ -35,21 +35,6 @@
                     Обратиться за помощью <br> к менеджеру.
                 </div>
             </div>
-            <style>
-                .seller {
-                    position: fixed;
-                    top: 2rem;
-                    left: 2rem;
-                    z-index: 999;
-                    overflow: hidden;
-                    border-radius: 50%;
-                    border: 4px solid rgb(223, 6, 6)
-                }
-
-                .seller img {
-                    width: 120px;
-                }
-            </style>
             <div class="form-header">
                 <h1 class="form-title">Форма заявки для регистрации</h1>
                 <div class="form-subtitle">
@@ -73,7 +58,7 @@
                 </div>
             </div>
 
-            <form id="registrationForm" action="store">
+            <form id="registrationForm" action="/store">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
                     <label class="section-label">1. Укажите предполагаемую организационно-правовую форму</label>
@@ -476,6 +461,19 @@
 
         }
         generateFounderSections(1);
+
+        const founderTypes = container.querySelectorAll('.founder-type');
+        founderTypes.forEach((select, index) => {
+            select.addEventListener('change', function() {
+                const section = select.closest('.founder-section');
+                const countryInput = section.querySelector(`input[name="founders[${index + 1}][country]"]`);
+                if (this.value === '1' || this.value === '2') {
+                    countryInput.value = 'Узбекистан';
+                } else {
+                    countryInput.value = ''; // Ixtiyoriy: boshqa holatlarda bo‘sh qilsin
+                }
+            });
+        });
 
         function updateRemainingShares(percentInputs, changedIndex) {
             let totalBeforeOrEqual = 0;
