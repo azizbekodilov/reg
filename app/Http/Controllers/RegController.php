@@ -80,12 +80,12 @@ class RegController extends Controller
     /**
      * Display the specified resource.
      */
-    public function call($checkId)
+    public function call($checkId, $customer_id)
     {
-        $this->customerId = request()->query('customer_id');
+        // $this->customerId = $customer_id;
         $json = Http::get("https://new.legaldesk.uz/csellers/".$checkId)->json();
         Http::post("https://new.legaldesk.uz/accept_task", [
-            'customer_id' => $this->customerId,
+            'customer_id' => $customer_id,
             'user_id' => $checkId,
         ]);
         $chat_id = $json['chat_id'];
