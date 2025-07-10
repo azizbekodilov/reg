@@ -24,18 +24,20 @@
             <style>
                 .seller {
                     position: fixed;
-                    bottom:2rem;
-                    right:20%;
+                    bottom: 2rem;
+                    right: 20%;
                     z-index: 999;
                     overflow: hidden;
                     border-radius: 50%;
                     border: 4px solid rgb(223, 6, 6)
                 }
+
                 .seller_text {
                     position: absolute;
                     top: -1rem;
                     z-index: ;
                 }
+
                 .seller img {
                     width: 120px;
                 }
@@ -44,7 +46,8 @@
                 <h1 class="form-title">Форма заявки для регистрации</h1>
                 <div class="form-subtitle">
                     <span class="warning-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.0013 9.00054C13.0013 9.55282 12.5536 10.0005 12.0013 10.0005C11.449 10.0005 11.0013 9.55282 11.0013 9.00054C11.0013 8.44825 11.449 8.00054 12.0013 8.00054C12.5536 8.00054 13.0013 8.44825 13.0013 9.00054Z"
                                 fill="#B00D15" fill-opacity="0.39" />
@@ -84,13 +87,15 @@
                         • Проверить свободна ли данное наименование можно через сайт <a href="https://new.birdarcha.uz/"
                             class="image-tooltip" target="_blank">https://new.birdarcha.uz/</a>
                     </div>
-                    <input type="text" class="form-input mb-2" name="company_name" placeholder="Основное наименование">
+                    <input type="text" class="form-input mb-2" name="company_name"
+                        placeholder="Основное наименование">
                 </div>
 
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
                     <label class="section-label">3. Опишите вид деятельности</label>
-                    <input type="text" class="form-input" name="type_of_activity" placeholder="Введите вид деятельности">
+                    <input type="text" class="form-input" name="type_of_activity"
+                        placeholder="Введите вид деятельности">
                     <div id="additionalActivities"></div>
                     <button type="button" class="add-button" id="addActivityBtn">+</button>
                 </div>
@@ -99,10 +104,10 @@
                 <div class="section">
                     <label class="section-label">4. Укажите юридический адрес по которому будет регистрироваться фирма
                         (город, район, улица, дом, кв.) а так же, его кадастровый номер</label>
-                    <input type="text" class="form-input" name="juridical_name" placeholder="Введите юридический адрес"
-                        style="margin-bottom: 15px;">
-                    <input type="text" class="form-input" name="cadastral_number" id="cadastralInput" placeholder="00:00:00:00:00:0000"
-                        maxlength="19">
+                    <input type="text" class="form-input" name="juridical_name"
+                        placeholder="Введите юридический адрес" style="margin-bottom: 15px;">
+                    <input type="text" class="form-input" name="cadastral_number" id="cadastralInput"
+                        placeholder="00:00:00:00:00:0000" maxlength="19">
                 </div>
 
                 <!-- 5. Предполагаемый налоговый режим< -->
@@ -140,8 +145,10 @@
                             менее 400 млн
                         </div>
                     </div>
-                    <input type="text" id="ustavFond" class="form-input" name="capital_summa" placeholder="Введите размер уставного фонда">
-                    <div id="fourMillions" class="d-none fs-12 text-red italic"> Уставной фонд должен быть не менее 400
+                    <input type="text" id="ustavFond" class="form-input" name="capital_summa"
+                        placeholder="Введите размер уставного фонда">
+                    <div id="fourMillions" class="d-none fs-12 text-red italic"> Уставной фонд должен быть не менее
+                        400
                         000 000 сум</div>
                 </div>
 
@@ -178,7 +185,8 @@
                     <div class="manager-grid">
                         <input type="text" name="head_name" class="form-input" placeholder="ФИО">
                         <input type="text" name="head_number" class="form-input" placeholder="Местный номер">
-                        <input type="email" name="head_mail" class="form-input" placeholder="Адрес электронной почты">
+                        <input type="email" name="head_mail" class="form-input"
+                            placeholder="Адрес электронной почты">
                     </div>
                 </div>
 
@@ -187,7 +195,8 @@
                     <label class="section-label">10. Укажите телефон и электронную почту предприятия для указания в
                         едином гос.реестре:</label>
                     <div class="contact-grid">
-                        <input type="tel" name="organisation_phone" class="form-input" placeholder="Телефон номер">
+                        <input type="tel" name="organisation_phone" class="form-input"
+                            placeholder="Телефон номер">
                         <input type="email" name="organisation_mail" class="form-input" placeholder="e-mail">
                     </div>
                 </div>
@@ -202,7 +211,8 @@
                 <!-- Отправить -->
                 <button type="submit" class="submit-button" id="submit">
                     <span>Отправить
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M13.8325 6.17463L8.10904 11.9592L1.59944 7.88767C0.66675 7.30414 0.860765 5.88744 1.91572 5.57893L17.3712 1.05277C18.3373 0.769629 19.2326 1.67283 18.9456 2.642L14.3731 18.0868C14.0598 19.1432 12.6512 19.332 12.0732 18.3953L8.10601 11.9602"
                                 stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -473,9 +483,9 @@
                 remainingInputs.push(percentInputs[i]);
             }
 
-            const sharePerRemaining = remainingInputs.length > 0
-                ? (remaining / remainingInputs.length)
-                : 0;
+            const sharePerRemaining = remainingInputs.length > 0 ?
+                (remaining / remainingInputs.length) :
+                0;
 
             remainingInputs.forEach(input => {
                 input.value = sharePerRemaining.toFixed(2);
@@ -494,7 +504,7 @@
             }
             return formatted;
         }
-        document.getElementById('foundersContainer').addEventListener('change', function (e) {
+        document.getElementById('foundersContainer').addEventListener('change', function(e) {
             if (e.target.classList.contains('organization-form-select')) {
                 const percentName = document.getElementById('percentName');
                 percentName.classList.remove('d-none');
@@ -522,7 +532,7 @@
         });
 
 
-        document.getElementById('orgTypeSelect').addEventListener('change', function () {
+        document.getElementById('orgTypeSelect').addEventListener('change', function() {
             window.selectedOrgType = this.value;
         });
 
@@ -535,7 +545,7 @@
             return Number(input.replace(/\s/g, ''));
         }
 
-        ustavFond.addEventListener('input', function () {
+        ustavFond.addEventListener('input', function() {
             const numeric = parseNumber(this.value);
             this.value = formatNumber(numeric.toString());
             removeFormat = this.value.replace(/\D/g, '')
@@ -560,7 +570,7 @@
             }
         });
 
-        document.getElementById('orgTypeSelect').addEventListener('change', function () {
+        document.getElementById('orgTypeSelect').addEventListener('change', function() {
             window.selectedOrgType = this.value;
             const fourMillion = document.getElementById('fourMillion');
             const numeric = parseNumber(ustavFond.value);
@@ -575,13 +585,13 @@
         });
 
         // Global event delegation
-        document.addEventListener('input', function (e) {
+        document.addEventListener('input', function(e) {
             if (e.target && e.target.matches('.percent')) {
                 checkForeignShareLimit();
             }
         });
 
-        document.addEventListener('change', function (e) {
+        document.addEventListener('change', function(e) {
             if (e.target && e.target.matches('.organization-form-select')) {
                 checkForeignShareLimit();
             }
@@ -625,7 +635,8 @@
             });
             localInputs.forEach(input => {
                 if (localTotal > 85) {
-                    input.setCustomValidity("Суммарная доля резиденть участников в СП ООО не должны быть больше 85%");
+                    input.setCustomValidity(
+                        "Суммарная доля резиденть участников в СП ООО не должны быть больше 85%");
                     input.reportValidity();
                 } else {
                     input.setCustomValidity('');
@@ -633,7 +644,7 @@
             });
         }
 
-        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
             const orgType = document.getElementById('orgTypeSelect').value;
             // Faqat СП ООО bo'lsa tekshir
             if (orgType === '2') {
@@ -666,7 +677,7 @@
                 }
             }
         });
-        document.getElementById('orgTypeSelect').addEventListener('change', function (e) {
+        document.getElementById('orgTypeSelect').addEventListener('change', function(e) {
             const selectedValue = e.target.value;
             const foundersContainer = document.getElementById('foundersContainer');
             const showOnlyForeign = selectedValue === '3'; // ИП ООО
@@ -688,7 +699,7 @@
             });
         });
         const cadastralInput = document.getElementById('cadastralInput');
-        cadastralInput.addEventListener('input', function (e) {
+        cadastralInput.addEventListener('input', function(e) {
             const formatted = formatCadastralNumber(e.target.value);
             e.target.value = formatted;
         });
@@ -708,7 +719,8 @@
         }
         document.querySelectorAll('.founder-button').forEach(button => {
             button.addEventListener('click', () => {
-                document.querySelectorAll('.founder-button').forEach(btn => btn.classList.remove('selected'));
+                document.querySelectorAll('.founder-button').forEach(btn => btn.classList.remove(
+                    'selected'));
                 button.classList.add('selected');
                 const selectedCount = parseInt(button.getAttribute('data-count'));
                 generateFounderSections(selectedCount);
@@ -738,23 +750,45 @@
             newInput.focus();
         });
         // Form submission
-        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
             // Simple validation
-            const requiredFields = document.querySelectorAll('.form-input[required], .form-select[required]');
+            const requiredFields = form.querySelectorAll('.form-input[required], .form-select[required]');
             let isValid = true;
+
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
-                    field.style.borderColor = '#5570F1';
+                    field.style.borderColor = 'red';
                     isValid = false;
                 } else {
-                    field.style.borderColor = '#5570F1'; а
+                    field.style.borderColor = '#5570F1';
                 }
             });
-            if (isValid) {
-                alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
-            } else {
+
+            if (!isValid) {
                 alert('Пожалуйста, заполните все обязательные поля.');
+                return;
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method || 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+                    form.reset(); // optional: clear form
+                } else {
+                    alert('Произошла ошибка при отправке. Пожалуйста, попробуйте позже.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Сетевая ошибка. Пожалуйста, проверьте соединение и повторите попытку.');
             }
         });
         // Form field focus effects
