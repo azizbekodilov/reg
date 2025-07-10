@@ -13,6 +13,10 @@
         color: #adb5bd;
     }
 
+    .text-underline {
+        text-decoration-style: underline;
+    }
+
     body {
         font-family: "Inter", sans-serif;
         background: #ffffff;

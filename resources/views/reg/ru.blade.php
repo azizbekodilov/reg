@@ -199,6 +199,9 @@
                         нас при регистрации компании:</label>
                     <textarea class="form-textarea" name="note" rows="4" placeholder="Введите дополнительную информацию"></textarea>
                 </div>
+                <div class="section text-red font-italic text-underline">
+                    <u>Пожалуйста, заполните все обязательные поля, отмеченные символом <b>*</b></u>
+                </div>
 
                 <!-- Отправить -->
                 <button type="submit" class="submit-button" id="submit">
