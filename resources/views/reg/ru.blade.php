@@ -786,9 +786,6 @@
             try {
                 const response = await fetch(form.action, {
                     method: form.method || 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
-                    },
                     body: formData,
                 });
 
