@@ -15,10 +15,9 @@ class RegController extends Controller
      */
     public function index($lang, $id = null)
     {
-        $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
-        $manager = '';
-        $manager = $json;
         $id = request()->query('id');
+        $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
+        $manager = $json['name'];
         if ($lang == "en"){
             return view('reg.en', compact('id', 'manager'));
         }else if ($lang == "uz"){
