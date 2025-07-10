@@ -18,6 +18,28 @@
 <body>
     <div class="container">
         <div class="main-content">
+            <button class="seller">
+                <img src="http://127.0.0.1:8000/img/ekaterina_sibaeva.png" alt="">
+            </button>
+            <style>
+                .seller {
+                    position: fixed;
+                    bottom:2rem;
+                    right:20%;
+                    z-index: 999;
+                    overflow: hidden;
+                    border-radius: 50%;
+                    border: 4px solid rgb(223, 6, 6)
+                }
+                .seller_text {
+                    position: absolute;
+                    top: -1rem;
+                    z-index: ;
+                }
+                .seller img {
+                    width: 120px;
+                }
+            </style>
             <div class="form-header">
                 <h1 class="form-title">Форма заявки для регистрации</h1>
                 <div class="form-subtitle">

@@ -50,6 +50,7 @@
         padding: 20px 40px;
         max-width: 82%;
         background: white;
+        position: relative;
     }
 
     .sidebar {
