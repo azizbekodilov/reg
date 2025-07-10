@@ -804,22 +804,20 @@
             p.innerHTML = words.map(w => `${w}<br>`).join('');
         });
 
-        function sendTelegramMessage(checkId) {
-            fetch('/send-telegram-message', {
-                    method: 'GET',
-                    body: JSON.stringify({
-                        check_id: checkId
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                })
-                .catch(error => {
-                    console.error('Xatolik:', error);
-                    alert("Xatolik yuz berdi");
-                });
-        }
+        fetch(`/call/${checkId}`, {
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Xatolik:', error);
+                alert("Xatolik yuz berdi");
+            });
     </script>
     @include('sweetalert::alert')
 </body>
