@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegController extends Controller
 {
@@ -77,6 +78,7 @@ class RegController extends Controller
                 ]
         );
         return $data;
+        Alert::alert('Title', 'Message', 'Type');
     }
 
     /**

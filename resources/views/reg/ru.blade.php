@@ -804,6 +804,7 @@
             p.innerHTML = words.map(w => `${w}<br>`).join('');
         });
     </script>
+    @include('sweetalert::alert')
 </body>
 
 </html>
