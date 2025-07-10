@@ -13,9 +13,10 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang, $id = null)
+    public function index($lang)
     {
-        $id = request()->query('id');
+        // $id = request()->query('id');
+        $id = 1;
         if ($lang == "en"){
             return view('reg.en', compact('id'));
         }else if ($lang == "uz"){
