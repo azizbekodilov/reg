@@ -17,10 +17,10 @@ class RegController extends Controller
     {
         if ($lang == "en"){
             return view('reg.en');
-        }else if ($lang == "ru"){
-            return view('reg.ru');
-        }else{
+        }else if ($lang == "uz"){
             return view('reg.uz');
+        }else{
+            return view('reg.ru');
         }
     }
 
