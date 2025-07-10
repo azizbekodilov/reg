@@ -11,11 +11,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-        <!-- SweetAlert2 CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-<!-- SweetAlert2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Форма заявки для регистрации</title>
     @include('reg.style')
 </head>
@@ -25,12 +25,13 @@
         <div class="main-content">
             <div class="call-wrapper">
                 <div class="call-buton">
-                    <button class="cc-calto-action-ripple" onclick="sendTelegramMessage({{$id}}, {{$customer_id}})">
-                        <img src="http://reg.legaldesk.uz/{{$avatar}}" alt="">
+                    <button class="cc-calto-action-ripple"
+                        onclick="sendTelegramMessage({{ $id }}, {{ $customer_id }})">
+                        <img src="http://reg.legaldesk.uz/{{ $avatar }}" alt="">
                     </button>
                 </div>
                 <div style="margin-top: 1rem;text-align:center;font-size:12px">
-                    {{$manager}} <br>
+                    {{ $manager }} <br>
                     Обратиться за помощью <br> к менеджеру.
                 </div>
             </div>
@@ -806,11 +807,11 @@
             } catch (error) {
                 console.error('Ошибка:', error);
                 Swal.fire({
-                        icon: 'error',
-                        title: 'Сетевая ошибка при отправке',
-                        text: 'Пожалуйста, проверьте соединение и повторите попытку.',
-                        confirmButtonText: 'Закрыть'
-                    });
+                    icon: 'error',
+                    title: 'Сетевая ошибка при отправке',
+                    text: 'Пожалуйста, проверьте соединение и повторите попытку.',
+                    confirmButtonText: 'Закрыть'
+                });
 
             }
         });
@@ -833,30 +834,29 @@
             p.innerHTML = words.map(w => `${w}<br>`).join('');
         });
 
-        function sendTelegramMessage(checkId, $customer_id) {
-    fetch(`/call/${checkId}`, {
-        method: 'GET'
-    })
-    .then(response => response.json())
-    .then(data => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Уведомления отправлены вашему менеджеру!',
-            text: data.message,
-            confirmButtonText: 'Закрыть'
-        });
-    })
-    .catch(error => {
-        console.error('Xatolik:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Xatolik yuz berdi!',
-            text: 'Telegramga yuborishda muammo bo‘ldi.',
-            confirmButtonText: 'Yopish'
-        });
-    });
-}
-
+        function sendTelegramMessage(checkId, customerId) {
+            fetch(`/call/${checkId}/${customerId}`, {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Уведомления отправлены вашему менеджеру!',
+                        text: data.message,
+                        confirmButtonText: 'Закрыть'
+                    });
+                })
+                .catch(error => {
+                    console.error('Xatolik:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xatolik yuz berdi!',
+                        text: 'Telegramga yuborishda muammo bo‘ldi.',
+                        confirmButtonText: 'Yopish'
+                    });
+                });
+        }
     </script>
     @include('sweetalert::alert')
 </body>
