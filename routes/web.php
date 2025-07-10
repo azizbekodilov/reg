@@ -8,7 +8,7 @@ Route::get("/file", function (){
  });
  Route::get('/pdf', 'PDFController@generatePDF');
  Route::get('/{lang}', [RegController::class, 'index']);
- Route::post('/form', 'RegController@store');
+ Route::post('/store', [RegController::class, 'store']);
 
  Route::get('/', function () {
      return redirect('/uz');

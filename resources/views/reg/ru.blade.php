@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <form id="registrationForm">
+            <form id="registrationForm" action="store">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
                     <label class="section-label">1. Укажите предполагаемую организационно-правовую форму</label>
