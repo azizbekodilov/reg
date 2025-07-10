@@ -82,7 +82,7 @@ class RegController extends Controller
      */
     public function call($checkId)
     {
-        $this->customerId = request()->query('client_id');
+        $this->customerId = request()->query('customer_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$checkId)->json();
         Http::post("https://new.legaldesk.uz/accept_task", [
             'customer_id' => $this->customerId,
