@@ -39,17 +39,17 @@ class RegController extends Controller
     {
         if ($request->lang == 'en'){
             $pdf = Pdf::loadView('reg.pdf.en', compact('request'));
-        }elseif ($request->lang == 'ru'){
-            $pdf = Pdf::loadView('reg.pdf.ru', compact('request'));
-        }else{
+        }elseif ($request->lang == 'uz'){
             $pdf = Pdf::loadView('reg.pdf.uz', compact('request'));
+        }else{
+            $pdf = Pdf::loadView('reg.pdf.ru', compact('request'));
         }
         $url = "ariza/".Carbon::now()->format("Y_m_d_H_i_s").".pdf";
         Storage::put($url, $pdf->output());
         sleep(1);
         if ($url) {
             $checkCustomerServiceId = $request->input("id");
-            Http::post("https://new.legaldesk.uz/customers/save_pdf_application", [
+            Http::post("https://new.legaldesk.uz/save_pdf", [
                 'url' => 'link',
                 'customer_service_id' => $checkCustomerServiceId,
             ]);
