@@ -17,7 +17,6 @@ class RegController extends Controller
     {
         // $id = request()->query('id');
         $id = 1;
-        dd($id);
         if ($lang == "en"){
             return view('reg.en', compact('id'));
         }else if ($lang == "uz"){
