@@ -76,6 +76,7 @@ class RegController extends Controller
                     'text'=> 'https://reg.legalact.uz/storage/',
                 ]
         );
+        \RealRashid\SweetAlert\Facades\Alert::alert('Title', 'Message', 'Type');
         return response()->json(['message' => 'Xabar yuborildi']);
     }
 
