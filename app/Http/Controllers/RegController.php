@@ -50,6 +50,7 @@ class RegController extends Controller
      */
     public function store(Request $request)
     {
+        $customer_service_id = request()->query('id');
         if ($request->lang == 'en') {
             $pdf = Pdf::loadView('reg.pdf.en', compact('request'));
         } elseif ($request->lang == 'uz') {
@@ -59,16 +60,15 @@ class RegController extends Controller
         }
         $url = "ariza/" . Carbon::now()->format("Y_m_d_H_i_s") . ".pdf";
         Storage::put($url, $pdf->output());
-        Log::info($url);
-        Http::post("https://new.legaldesk.uz/save_data", [
-            'customer_service_id' => $request->customer_service_id,
+        $data = Http::post("https://new.legaldesk.uz/save_data", [
+            'customer_service_id' => $customer_service_id,
             'organisation_type' => $request->organisation_type,
             'company_name' => $request->company_name,
             'type_of_activity' => $request->type_of_activity,
             'juridical_name' => $request->juridical_name,
-            'cadastr_number' => $request->cadastr_number,
-            'tax_type' => $request->tax_type,
-            'capital' => $request->capital,
+            'cadastral_number' => $request->cadastral_number,
+            'tax_regime' => $request->tax_regime,
+            'capital_summa' => $request->capital_summa,
             'customer_service_founder_id' => 10,
             'head_name' => $request->head_name,
             'head_phone' => $request->head_phone,
@@ -77,6 +77,7 @@ class RegController extends Controller
             'organisation_mail' => $request->organisation_mail,
             'note' => $request->note,
         ]);
+        Log::info($data);
         return response()->json([
             'message' => 'Заявка успешно отправлена!',
             'pdf_url' => asset('storage/' . $url)

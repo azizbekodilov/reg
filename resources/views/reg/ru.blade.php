@@ -752,62 +752,66 @@
         });
         // Form submission
         document.getElementById('registrationForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        e.preventDefault();
 
-            const form = e.target;
-            const formData = new FormData(form);
+        const form = e.target;
+        const formData = new FormData(form);
 
-            // Simple validation
-            const requiredFields = form.querySelectorAll('.form-input[required], .form-select[required]');
-            let isValid = true;
+        const requiredFields = form.querySelectorAll('.form-input[required], .form-select[required]');
+        let isValid = true;
 
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.style.borderColor = 'red';
-                    isValid = false;
-                } else {
-                    field.style.borderColor = '#5570F1';
-                }
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                field.style.borderColor = '#5570F1';
+            }
+        });
+
+        if (!isValid) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Ошибка',
+                text: 'Пожалуйста, заполните все обязательные поля.',
+            });
+            return;
+        }
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method || 'POST',
+                body: formData,
             });
 
-            if (!isValid) {
-                alert('Пожалуйста, заполните все обязательные поля.');
-                return;
-            }
+            if (response.ok) {
+                const data = await response.json();
 
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method || 'POST',
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Заявка успешно отправлена!',
-                        text: 'Мы свяжемся с вами в ближайшее время',
-                        confirmButtonText: 'Закрыть'
-                    });
-                    form.reset(); // optional: clear form
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Произошла ошибка при отправке',
-                        text: 'Пожалуйста, свяжитесь с вашим менеджером',
-                        confirmButtonText: 'Закрыть'
-                    });
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Сетевая ошибка при отправке',
-                    text: 'Пожалуйста, проверьте соединение и повторите попытку.',
+                    icon: 'success',
+                    title: data.message,
+                    html: `<a href="${data.pdf_url}" target="_blank">PDF-ni ko‘rish</a>`,
                     confirmButtonText: 'Закрыть'
                 });
 
+                form.reset();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Произошла ошибка при отправке',
+                    text: 'Пожалуйста, свяжитесь с вашим менеджером',
+                    confirmButtonText: 'Закрыть'
+                });
             }
-        });
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Сетевая ошибка',
+                text: 'Проверьте соединение с интернетом',
+            });
+        }
+    });
         // Form field focus effects
         document.addEventListener('focusin', (e) => {
             if (e.target.matches('.form-input, .form-select, .form-textarea')) {
