@@ -6,16 +6,21 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class RegController extends Controller
 {
+
+    public $customerId = null;
+
     /**
      * Display a listing of the resource.
      */
     public function index($lang, $id = null, $json = null, $manager = null, $avatar = null)
     {
         $id = request()->query('id');
+        $this->customerId = request()->query('client_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
         if ($json != null) {
             # code...
@@ -54,9 +59,10 @@ class RegController extends Controller
         }
         $url = "ariza/".Carbon::now()->format("Y_m_d_H_i_s").".pdf";
         Storage::put($url, $pdf->output());
+        Log::info($url);
         sleep(1);
         if ($url) {
-            $checkCustomerServiceId = $request->input("id");
+            $checkCustomerServiceId = $request->input("client_id");
             Http::post("https://new.legaldesk.uz/save_pdf", [
                 'url' => 'link',
                 'customer_service_id' => $checkCustomerServiceId,
@@ -77,6 +83,10 @@ class RegController extends Controller
     public function call($checkId)
     {
         $json = Http::get("https://new.legaldesk.uz/csellers/".$checkId)->json();
+        Http::post("https://new.legaldesk.uz/accept_task", [
+            'customer_id' => $this->customerId,
+            'user_id' => $checkId,
+        ]);
         $chat_id = $json['chat_id'];
         $name = $json['name'];
         Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
