@@ -13,7 +13,7 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang, $id = null)
+    public function index($lang, $id = null, $json = null, $manager = null, $avatar = null)
     {
         $id = request()->query('id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
