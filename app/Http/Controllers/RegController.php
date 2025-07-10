@@ -69,6 +69,7 @@ class RegController extends Controller
     public function call($checkId)
     {
         $json = Http::get("https://new.legaldesk.uz/csellers/".$checkId)->json();
+        return $json;
         $chat_id = $json['chat_id'];
         Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendDocument",
                 [
