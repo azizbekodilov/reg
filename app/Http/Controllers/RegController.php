@@ -13,17 +13,16 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($lang, $id = null)
     {
-        // $id = request()->query('id');
-        $id = 1;
-        // if ($lang == "en"){
-        //     return view('reg.en', compact('id'));
-        // }else if ($lang == "uz"){
-        //     return view('reg.uz', compact('id'));
-        // }else{
+        $id = request()->query('id');
+        if ($lang == "en"){
+            return view('reg.en', compact('id'));
+        }else if ($lang == "uz"){
+            return view('reg.uz', compact('id'));
+        }else{
             return view('reg.ru', compact('id'));
-        // }
+        }
     }
 
     /**
