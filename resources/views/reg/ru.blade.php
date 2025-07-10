@@ -59,6 +59,7 @@
             </div>
 
             <form id="registrationForm" action="/store">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
                     <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую
@@ -786,6 +787,9 @@
             try {
                 const response = await fetch(form.action, {
                     method: form.method || 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': form.querySelector('input[name="_token"]').value
+                    },
                     body: formData,
                 });
 
