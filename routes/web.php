@@ -12,5 +12,5 @@ Route::get("/file", function (){
  Route::get('/call/{id}', [RegController::class, 'call']);
 
  Route::get('/', function () {
-     return redirect('/uz');
+     return redirect('/ru');
  });
