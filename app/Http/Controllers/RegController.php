@@ -20,7 +20,7 @@ class RegController extends Controller
     public function index($lang, $id = null, $json = null, $manager = null, $avatar = null, $customer_id = null)
     {
         $id = request()->query('id');
-        $customer_id = request()->query('client_id');
+        $customer_id = request()->query('customer_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
         if ($json != null) {
             # code...
@@ -88,8 +88,8 @@ class RegController extends Controller
             'customer_id' => $customer_id,
             'user_id' => $checkId,
         ]);
-        $chat_id = $json['chat_id'];
-        $name = $json['name'];
+        $chat_id = $json['chat_id'] ?? null;
+        $name = $json['name'] ?? 'Пользователь';
         Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
                 [
                     'chat_id'=> -1001285835091,
