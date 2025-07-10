@@ -18,6 +18,7 @@ class RegController extends Controller
         $id = request()->query('id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
         $manager = $json['name'];
+        $avatar = '/img/avatar.jpg';
         $avatar = '/img/'.$json['avatar2'];
         if ($lang == "en"){
             return view('reg.en', compact('id', 'manager', 'avatar'));
