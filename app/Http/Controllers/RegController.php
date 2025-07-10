@@ -17,10 +17,10 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang, $id = null, $json = null, $manager = null, $avatar = null)
+    public function index($lang, $id = null, $json = null, $manager = null, $avatar = null, $customer_id = null)
     {
         $id = request()->query('id');
-        $this->customerId = request()->query('client_id');
+        $customer_id = request()->query('client_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
         if ($json != null) {
             # code...
@@ -29,11 +29,11 @@ class RegController extends Controller
             $avatar = '/img/'.$json['avatar2'];
         }
         if ($lang == "en"){
-            return view('reg.en', compact('id', 'manager', 'avatar'));
+            return view('reg.en', compact('id', 'customer_id', 'manager', 'avatar'));
         }else if ($lang == "uz"){
-            return view('reg.uz', compact('id', 'manager', 'avatar'));
+            return view('reg.uz', compact('id', 'customer_id', 'manager', 'avatar'));
         }else{
-            return view('reg.ru', compact('id', 'manager', 'avatar'));
+            return view('reg.ru', compact('id', 'customer_id', 'manager', 'avatar'));
         }
     }
 

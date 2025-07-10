@@ -25,7 +25,7 @@
         <div class="main-content">
             <div class="call-wrapper">
                 <div class="call-buton">
-                    <button class="cc-calto-action-ripple" onclick="sendTelegramMessage({{$id}})">
+                    <button class="cc-calto-action-ripple" onclick="sendTelegramMessage({{$id}}, {{$customer_id}})">
                         <img src="http://reg.legaldesk.uz/{{$avatar}}" alt="">
                     </button>
                 </div>
@@ -833,7 +833,7 @@
             p.innerHTML = words.map(w => `${w}<br>`).join('');
         });
 
-        function sendTelegramMessage(checkId) {
+        function sendTelegramMessage(checkId, $customer_id) {
     fetch(`/call/${checkId}`, {
         method: 'GET'
     })
