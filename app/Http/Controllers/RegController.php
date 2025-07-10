@@ -70,14 +70,14 @@ class RegController extends Controller
     {
         $json = Http::get("https://new.legaldesk.uz/csellers/".$checkId)->json();
         $chat_id = $json['chat_id'];
-        $data = Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
+        $name = $json['name'];
+        Http::get("https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
                 [
                     'chat_id'=>$chat_id,
-                    'text'=> 'https://reg.legalact.uz/storage/',
+                    'text'=>  $name.'! Ваш клиент Максим обращается к вам за помощью в регистрации заявки.',
                 ]
         );
-        \RealRashid\SweetAlert\Facades\Alert::alert('Title', 'Message', 'Type');
-        return response()->json(['message' => 'Xabar yuborildi']);
+        return response()->json(['message' => 'Скоро с вами свяжутся.']);
     }
 
     /**

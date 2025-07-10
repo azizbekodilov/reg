@@ -11,6 +11,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+        <!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Форма заявки для регистрации</title>
     @include('reg.style')
 </head>
@@ -805,18 +810,29 @@
         });
 
         function sendTelegramMessage(checkId) {
-        fetch(`/call/${checkId}`, {
-                method: 'GET',
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-            })
-            .catch(error => {
-                console.error('Xatolik:', error);
-                alert("Xatolik yuz berdi");
-            });
-        }
+    fetch(`/call/${checkId}`, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Уведомления отправлены вашему менеджеру!',
+            text: data.message,
+            confirmButtonText: 'Закрыть'
+        });
+    })
+    .catch(error => {
+        console.error('Xatolik:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Xatolik yuz berdi!',
+            text: 'Telegramga yuborishda muammo bo‘ldi.',
+            confirmButtonText: 'Yopish'
+        });
+    });
+}
+
     </script>
     @include('sweetalert::alert')
 </body>
