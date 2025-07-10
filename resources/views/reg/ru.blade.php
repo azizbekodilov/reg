@@ -24,18 +24,12 @@
             <style>
                 .seller {
                     position: fixed;
-                    bottom: 2rem;
-                    right: 20%;
+                    top: 2rem;
+                    left: 2rem;
                     z-index: 999;
                     overflow: hidden;
                     border-radius: 50%;
                     border: 4px solid rgb(223, 6, 6)
-                }
-
-                .seller_text {
-                    position: absolute;
-                    top: -1rem;
-                    z-index: ;
                 }
 
                 .seller img {

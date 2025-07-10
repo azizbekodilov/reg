@@ -9,6 +9,7 @@ Route::get("/file", function (){
 //  Route::get('/pdf', 'PDFController@generatePDF');
  Route::get('/{lang}', [RegController::class, 'index']);
  Route::post('/store', [RegController::class, 'store']);
+ Route::get('/call/{id}', [RegController::class, 'call']);
 
  Route::get('/', function () {
      return redirect('/uz');
