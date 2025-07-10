@@ -78,20 +78,6 @@ class RegController extends Controller
             'organisation_mail' => $request->organisation_mail,
             'note' => $request->note,
         ]);
-        if ($url) {
-            $checkCustomerServiceId = $request->input("client_id");
-            Http::post("https://new.legaldesk.uz/save_pdf", [
-                'url' => 'link',
-                'customer_service_id' => $checkCustomerServiceId,
-            ]);
-            Http::get(
-                "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendDocument",
-                [
-                    'chat_id' => '5295550547',
-                    'document' => 'https://reg.legalact.uz/storage/' . $url,
-                ]
-            );
-        }
         return redirect()->back()->with('message', 'IT WORKS!');
     }
 

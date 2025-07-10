@@ -176,7 +176,7 @@
                     <label class="section-label">9. Сведения о предполагаемом Руководителе Организации:</label>
                     <div class="manager-grid">
                         <input type="text" name="head_name" class="form-input" placeholder="* ФИО">
-                        <input type="text" name="head_number" class="form-input" placeholder="Местный номер">
+                        <input type="text" name="head_phone" class="form-input" placeholder="Местный номер">
                         <input type="email" name="head_mail" class="form-input"
                             placeholder="Адрес электронной почты">
                     </div>
