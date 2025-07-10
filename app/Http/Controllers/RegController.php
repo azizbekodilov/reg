@@ -60,7 +60,6 @@ class RegController extends Controller
         $url = "ariza/" . Carbon::now()->format("Y_m_d_H_i_s") . ".pdf";
         Storage::put($url, $pdf->output());
         Log::info($url);
-        sleep(1);
         Http::post("https://new.legaldesk.uz/save_data", [
             'customer_service_id' => $request->customer_service_id,
             'organisation_type' => $request->organisation_type,
@@ -78,7 +77,10 @@ class RegController extends Controller
             'organisation_mail' => $request->organisation_mail,
             'note' => $request->note,
         ]);
-        return redirect()->back()->with('message', 'IT WORKS!');
+        return response()->json([
+            'message' => 'Заявка успешно отправлена!',
+            'pdf_url' => asset('storage/' . $url)
+        ], 200);
     }
 
     /**
