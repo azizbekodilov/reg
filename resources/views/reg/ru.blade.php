@@ -804,6 +804,7 @@
             p.innerHTML = words.map(w => `${w}<br>`).join('');
         });
 
+        function sendTelegramMessage(checkId) {
         fetch(`/call/${checkId}`, {
                 method: 'GET',
                 headers: {
@@ -818,6 +819,7 @@
                 console.error('Xatolik:', error);
                 alert("Xatolik yuz berdi");
             });
+        }
     </script>
     @include('sweetalert::alert')
 </body>
