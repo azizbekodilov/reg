@@ -188,8 +188,8 @@
                         едином гос.реестре:</label>
                     <div class="contact-grid">
                         <input type="tel" name="organisation_phone" class="form-input"
-                            placeholder="Телефон номер">
-                        <input type="email" name="organisation_mail" class="form-input" placeholder="e-mail">
+                            placeholder="* Телефон номер">
+                        <input type="email" name="organisation_mail" class="form-input" placeholder="Почта">
                     </div>
                 </div>
 
