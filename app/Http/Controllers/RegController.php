@@ -15,13 +15,16 @@ class RegController extends Controller
      */
     public function index($lang, $id = null)
     {
+        $json = Http::get("https://new.legaldesk.uz/csellers/".$id)->json();
+        $chat_id = $json['chat_id'];
+        $manager = $json['name'];
         $id = request()->query('id');
         if ($lang == "en"){
-            return view('reg.en', compact('id'));
+            return view('reg.en', compact('id', 'manager'));
         }else if ($lang == "uz"){
-            return view('reg.uz', compact('id'));
+            return view('reg.uz', compact('id', 'manager'));
         }else{
-            return view('reg.ru', compact('id'));
+            return view('reg.ru', compact('id', 'manager'));
         }
     }
 
