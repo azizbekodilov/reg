@@ -30,7 +30,7 @@
                     </button>
                 </div>
                 <div style="margin-top: 1rem;text-align:center;font-size:12px">
-                    Ваш менеджер: {{$manager}} <br>
+                    {{$manager}} <br>
                     Обратиться за помощью <br> к менеджеру.
                 </div>
             </div>
