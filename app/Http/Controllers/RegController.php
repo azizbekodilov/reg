@@ -50,6 +50,7 @@ class RegController extends Controller
      */
     public function store(Request $request)
     {
+        dd('test');
         $customer_service_id = request()->query('id');
         if ($request->lang == 'en') {
             $pdf = Pdf::loadView('reg.pdf.en', compact('request'));
