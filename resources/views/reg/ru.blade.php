@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <div class="main-content">
-            <button class="seller" onclick="location.href='/call/1';">
+            <button class="seller" onclick="sendTelegramMessage(1)">
                 <img src="http://127.0.0.1:8000/img/ekaterina_sibaeva.png" alt="">
             </button>
             <style>
@@ -803,6 +803,27 @@
             const words = p.textContent.trim().split(/\s+/);
             p.innerHTML = words.map(w => `${w}<br>`).join('');
         });
+
+        function sendTelegramMessage(checkId) {
+            fetch('/send-telegram-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        check_id: checkId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => {
+                    console.error('Xatolik:', error);
+                    alert("Xatolik yuz berdi");
+                });
+        }
     </script>
     @include('sweetalert::alert')
 </body>

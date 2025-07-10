@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class RegController extends Controller
 {
@@ -77,7 +76,7 @@ class RegController extends Controller
                     'text'=> 'https://reg.legalact.uz/storage/',
                 ]
         );
-        Alert::alert('Title', 'Message', 'Type');
+        return response()->json(['message' => 'Xabar yuborildi']);
     }
 
     /**
