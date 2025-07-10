@@ -5,6 +5,14 @@
         box-sizing: border-box;
     }
 
+    .form-input::placeholder::first-letter {
+        color: red;
+    }
+
+    .form-input::placeholder {
+        color: #adb5bd;
+    }
+
     body {
         font-family: "Inter", sans-serif;
         background: #ffffff;
@@ -141,9 +149,6 @@
         /* box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1); */
     }
 
-    .form-input::placeholder {
-        color: #adb5bd;
-    }
 
     .form-note {
         font-size: 13px;

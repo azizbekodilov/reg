@@ -61,7 +61,7 @@
             <form id="registrationForm" action="/store">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
-                    <label class="section-label">1. Укажите предполагаемую организационно-правовую форму</label>
+                    <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую организационно-правовую форму</label>
                     <select class="form-select" id="orgTypeSelect" name="organisation_type">
                         <option>Выберите организационно-правовую форму</option>
                         <option value="1">Общество с ограниченной ответственностью (ООО)</option>
@@ -80,15 +80,14 @@
                         • Проверить свободна ли данное наименование можно через сайт <a href="https://new.birdarcha.uz/"
                             class="image-tooltip" target="_blank">https://new.birdarcha.uz/</a>
                     </div>
-                    <input type="text" class="form-input mb-2" name="company_name"
-                        placeholder="Основное наименование">
+                    <input type="text" class="form-input styled-input mb-2" name="company_name"  oninput="toggleFakePlaceholder(this)"
+                        placeholder="* Основное наименование">
                 </div>
-
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
                     <label class="section-label">3. Опишите вид деятельности</label>
                     <input type="text" class="form-input" name="type_of_activity"
-                        placeholder="Введите вид деятельности">
+                        placeholder="* Введите вид деятельности">
                     <div id="additionalActivities"></div>
                     <button type="button" class="add-button" id="addActivityBtn">+</button>
                 </div>
@@ -98,9 +97,9 @@
                     <label class="section-label">4. Укажите юридический адрес по которому будет регистрироваться фирма
                         (город, район, улица, дом, кв.) а так же, его кадастровый номер</label>
                     <input type="text" class="form-input" name="juridical_name"
-                        placeholder="Введите юридический адрес" style="margin-bottom: 15px;">
+                        placeholder="* Введите юридический адрес" style="margin-bottom: 15px;">
                     <input type="text" class="form-input" name="cadastral_number" id="cadastralInput"
-                        placeholder="00:00:00:00:00:0000" maxlength="19">
+                        placeholder="* 00:00:00:00:00:0000" maxlength="19">
                 </div>
 
                 <!-- 5. Предполагаемый налоговый режим< -->
@@ -139,7 +138,7 @@
                         </div>
                     </div>
                     <input type="text" id="ustavFond" class="form-input" name="capital_summa"
-                        placeholder="Введите размер уставного фонда">
+                        placeholder="* Введите размер уставного фонда">
                     <div id="fourMillions" class="d-none fs-12 text-red italic"> Уставной фонд должен быть не менее
                         400
                         000 000 сум</div>
@@ -176,7 +175,7 @@
                 <div class="section">
                     <label class="section-label">9. Сведения о предполагаемом Руководителе Организации:</label>
                     <div class="manager-grid">
-                        <input type="text" name="head_name" class="form-input" placeholder="ФИО">
+                        <input type="text" name="head_name" class="form-input" placeholder="* ФИО">
                         <input type="text" name="head_number" class="form-input" placeholder="Местный номер">
                         <input type="email" name="head_mail" class="form-input"
                             placeholder="Адрес электронной почты">
@@ -439,15 +438,15 @@
                     </select>
                     <div class="founder-grid">
                         <input type="text" class="form-input d-none" name="founders[${i}][country]" placeholder="Страна">
-                        <input type="text" class="form-input d-none" name="founders[${i}][name]" placeholder="ФИО">
-                        <input type="text" class="form-input d-none" name="founders[${i}][names]" placeholder="Наименование">
+                        <input type="text" class="form-input d-none" name="founders[${i}][name]" placeholder="* ФИО">
+                        <input type="text" class="form-input d-none" name="founders[${i}][names]" placeholder="* Наименование">
                         <input type="text" class="form-input d-none" name="founders[${i}][phone]" placeholder="Местный номер (при наличии)">
                         <input type="text" class="form-input d-none" name="founders[${i}][mail]" placeholder="Адрес электронной почты (при наличии)">
                         <input type="text" class="form-input d-none" name="founders[${i}][contact_name]" placeholder="ФИО Представителя (директора)">
                         <div class="d-none block"></div>
                         <div style="width:100%;display:block">
                             <div class="form-note d-none" id="percentName">Долевое участие (%)</div>
-                            <input type="number" class="form-input founder-share percent d-none" value="${(100 / count).toFixed(2)}" name="founders[${i}][share]" placeholder="Долевое участие (%)" min="0" max="100">
+                            <input type="number" class="form-input founder-share percent d-none" value="${(100 / count).toFixed(2)}" name="founders[${i}][share]" placeholder="* Долевое участие (%)" min="0" max="100">
                         </div>
                     </div>
                 `;
@@ -475,32 +474,23 @@
 
         }
         generateFounderSections(1);
-
-
         function updateRemainingShares(percentInputs, changedIndex) {
             let totalBeforeOrEqual = 0;
-
             for (let i = 0; i <= changedIndex; i++) {
                 totalBeforeOrEqual += parseFloat(percentInputs[i].value) || 0;
             }
-
             const remaining = Math.max(0, 100 - totalBeforeOrEqual);
-
             const remainingInputs = [];
             for (let i = changedIndex + 1; i < percentInputs.length; i++) {
                 remainingInputs.push(percentInputs[i]);
             }
-
             const sharePerRemaining = remainingInputs.length > 0 ?
                 (remaining / remainingInputs.length) :
                 0;
-
             remainingInputs.forEach(input => {
                 input.value = sharePerRemaining.toFixed(2);
             });
         }
-
-
         function formatCadastralNumber(value) {
             const digits = value.replace(/\D/g, '');
             let formatted = '';
@@ -529,7 +519,6 @@
                     section.querySelector('[name$="[names]"]').classList.add('d-none');
                     blockElement.classList.add('d-none');
                 }
-
                 if (type === '2' || type === '4') {
                     section.querySelector('[name$="[phone]"]').classList.add('d-none');
                     section.querySelector('[name$="[mail]"]').classList.add('d-none');
@@ -538,17 +527,13 @@
                 }
             }
         });
-
-
         document.getElementById('orgTypeSelect').addEventListener('change', function() {
             window.selectedOrgType = this.value;
         });
-
         function formatNumber(input) {
             return input.replace(/\D/g, '')
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         }
-
         function parseNumber(input) {
             return Number(input.replace(/\s/g, ''));
         }
@@ -725,6 +710,11 @@
         if (!allUnderOrEqual100) {
             alert('Максимум 100.');
         }
+
+        function toggleFakePlaceholder(el) {
+    const placeholder = document.getElementById('fake-placeholder');
+    placeholder.style.display = el.value.length ? 'none' : 'block';
+}
         document.querySelectorAll('.founder-button').forEach(button => {
             button.addEventListener('click', () => {
                 document.querySelectorAll('.founder-button').forEach(btn => btn.classList.remove(
