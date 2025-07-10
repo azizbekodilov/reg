@@ -50,7 +50,13 @@ class RegController extends Controller
      */
     public function store(Request $request)
     {
-        dd('test');
+        Http::get(
+            "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
+            [
+                'chat_id' => -1001285835091,
+                'text' =>  'обращается к вам за помощью в регистрации заявки.',
+            ]
+        );
         $customer_service_id = request()->query('id');
         if ($request->lang == 'en') {
             $pdf = Pdf::loadView('reg.pdf.en', compact('request'));
