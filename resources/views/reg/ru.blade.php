@@ -454,6 +454,20 @@
                 container.appendChild(founderSection);
             }
 
+            const founderTypes = container.querySelectorAll('.founder-type');
+            founderTypes.forEach((select, index) => {
+                select.addEventListener('change', function() {
+                    const section = select.closest('.founder-section');
+                    const countryInput = section.querySelector(
+                        `input[name="founders[${index + 1}][country]"]`);
+                    if (this.value === '1' || this.value === '2') {
+                        countryInput.value = 'Узбекистан';
+                    } else {
+                        countryInput.value = ''; // Ixtiyoriy: boshqa holatlarda bo‘sh qilsin
+                    }
+                });
+            });
+
             const allPercents = container.querySelectorAll('.percent');
             allPercents.forEach((input, index) => {
                 input.addEventListener('input', () => updateRemainingShares(allPercents, index));
@@ -462,18 +476,6 @@
         }
         generateFounderSections(1);
 
-        const founderTypes = container.querySelectorAll('.founder-type');
-        founderTypes.forEach((select, index) => {
-            select.addEventListener('change', function() {
-                const section = select.closest('.founder-section');
-                const countryInput = section.querySelector(`input[name="founders[${index + 1}][country]"]`);
-                if (this.value === '1' || this.value === '2') {
-                    countryInput.value = 'Узбекистан';
-                } else {
-                    countryInput.value = ''; // Ixtiyoriy: boshqa holatlarda bo‘sh qilsin
-                }
-            });
-        });
 
         function updateRemainingShares(percentInputs, changedIndex) {
             let totalBeforeOrEqual = 0;
