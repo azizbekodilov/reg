@@ -799,8 +799,8 @@
 
                     Swal.fire({
                         icon: 'success',
-                        title: data.message,
-                        text: data.subMessage,
+                        title: 'Успешно',
+                        text: 'Ваша заявка отправлена.',
                         confirmButtonText: 'Закрыть'
                     });
 
