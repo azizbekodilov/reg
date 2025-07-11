@@ -800,7 +800,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: data.message,
-                        html: `<a href="${data.pdf_url}" target="_blank">PDF-ni ko‘rish</a>`,
+                        text: data.subMessage,
                         confirmButtonText: 'Закрыть'
                     });
 
