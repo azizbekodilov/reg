@@ -20,7 +20,7 @@ class RegController extends Controller
     public function index($lang, $id = null, $json = null, $manager = null, $avatar = null, $customer_id = null)
     {
         $id = request()->query('id');
-        $customer_id = request()->query('customer_id');
+        $customer_id = request()->query('client_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/" . $id)->json();
         if ($json != null) {
             # code...
@@ -50,18 +50,15 @@ class RegController extends Controller
      */
     public function store(Request $request)
     {
-        $customer_service_id = request()->query('id');
-        if ($request->lang == 'en') {
-            $pdf = Pdf::loadView('reg.pdf.en', compact('request'));
-        } elseif ($request->lang == 'uz') {
-            $pdf = Pdf::loadView('reg.pdf.uz', compact('request'));
-        } else {
-            $pdf = Pdf::loadView('reg.pdf.ru', compact('request'));
-        }
-        $url = "ariza/" . Carbon::now()->format("Y_m_d_H_i_s") . ".pdf";
-        Storage::put($url, $pdf->output());
+        Http::get(
+            "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
+            [
+                'chat_id' => -1001877231624,
+                'text' => $request->customer_service_id,
+            ]
+        );
         $data = Http::post("https://new.legaldesk.uz/save_data", [
-            'customer_service_id' => $customer_service_id,
+            'customer_service_id' => $request->customer_service_id,
             'organisation_type' => $request->organisation_type,
             'company_name' => $request->company_name,
             'type_of_activity' => $request->type_of_activity,
@@ -69,7 +66,7 @@ class RegController extends Controller
             'cadastral_number' => $request->cadastral_number,
             'tax_regime' => $request->tax_regime,
             'capital_summa' => $request->capital_summa,
-            'customer_service_founder_id' => 10,
+            'customer_service_founder' => $request->founders,
             'head_name' => $request->head_name,
             'head_phone' => $request->head_phone,
             'head_mail' => $request->head_mail,
@@ -79,8 +76,7 @@ class RegController extends Controller
         ]);
         Log::info($data);
         return response()->json([
-            'message' => $data,
-            'pdf_url' => asset('storage/' . $url)
+            'message' => $data
         ], 200);
     }
 

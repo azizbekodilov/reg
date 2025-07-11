@@ -60,6 +60,7 @@
 
             <form id="registrationForm" action="/store" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="customer_service_id" value="{{ $customer_id }}">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
                     <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую
