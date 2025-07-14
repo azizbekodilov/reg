@@ -14,7 +14,7 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang, $id = null, $json = null, $manager = 1, $avatar = null, $customer_id = 1)
+    public function index($lang, $id = 2, $json = null, $manager = 1, $avatar = null, $customer_id = 274)
     {
         $id = request()->query('id');
         $customer_id = request()->query('client_id');
