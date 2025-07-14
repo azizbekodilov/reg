@@ -249,7 +249,7 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Нодир Ахмедов</h4>
-                                <p>Заместитель ген. директора</p>
+                                <p>Заместитель генерального директора</p>
                             </div>
                         </div>
                     </div>
@@ -271,7 +271,18 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Жахонгир Аллаяров</h4>
-                                <p>Юрист</p>
+                                <p>Руководитель юридического отдела</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/zafar_jumaev.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Зафар Жумаев</h4>
+                                <p>Юрисконсульт</p>
                             </div>
                         </div>
                     </div>
@@ -283,17 +294,6 @@
                             <div>
                                 <h4 class="breakText">Феруза Рузматова</h4>
                                 <p>Главный бухгалтер</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="img/zafar_jumaev.png">
-                        </div>
-                        <div class="member-info">
-                            <div>
-                                <h4 class="breakText">Зафар Жумаев</h4>
-                                <p>Юристь</p>
                             </div>
                         </div>
                     </div>
@@ -326,7 +326,7 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Саидмурод Халилуллаев</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <p>Бухгалтер 1-ой категории</p>
                             </div>
                         </div>
                     </div>
@@ -370,7 +370,7 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Азиза Норматова</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <p>Бухгалтер 1-ой категории</p>
                             </div>
                         </div>
                     </div>
@@ -392,7 +392,7 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Зухра Мирзаева</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <p>Бухгалтер</p>
                             </div>
                         </div>
                     </div>
@@ -403,7 +403,7 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Эъзоза Мирахматова</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <p>Бухгалтер 1-ой категории</p>
                             </div>
                         </div>
                     </div>

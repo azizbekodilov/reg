@@ -264,7 +264,18 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Jahongir Allayarov</h4>
-                                <p>Lawyer</p>
+                                <p>Head of Legal Department</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/zafar_jumaev.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Zafar Jumaev</h4>
+                                <p>Legal Advisor</p>
                             </div>
                         </div>
                     </div>
@@ -276,17 +287,6 @@
                             <div>
                                 <h4 class="breakText">Feruza Ruzmatova</h4>
                                 <p>Chief accountant</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="img/zafar_jumaev.png">
-                        </div>
-                        <div class="member-info">
-                            <div>
-                                <h4 class="breakText">Zafar Jumaev</h4>
-                                <p>Laywer</p>
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,7 @@
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Zuhra Mirzaeva</h4>
-                                <p>Accountant 1st category</p>
+                                <p>Accountant</p>
                             </div>
                         </div>
                     </div>
