@@ -19,12 +19,13 @@ class RegController extends Controller
         $id = request()->query('id');
         $customer_id = request()->query('client_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/" . $id)->json();
-        if ($json !== null) {
-            # code...
+        if ($json != null) {
             $manager = $json['name'];
             $avatar = '/img/image.png';
             $avatar = '/img/' . $json['avatar2'];
         } else {
+            $manager = 'Руслан Берекеев';
+            $avatar = '/img/image.png';
             $id = 2;
             $customer_id = 274;
         }
