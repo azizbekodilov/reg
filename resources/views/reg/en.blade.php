@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <input type="text" id="ustavFond" class="form-input" name="capital_summa"
-                        placeholder="* Введите размер уставного фонда">
+                        placeholder="* Enter the size of the authorized capital">
                     <div id="fourMillions" class="d-none fs-12 text-red italic"> For foreign/joint ventures: minimum 400,000,000 UZS</div>
                 </div>
 
@@ -738,7 +738,7 @@
             removeButton.type = 'button';
             removeButton.className = 'remove-button';
             removeButton.innerHTML = '×';
-            removeButton.title = 'Удалить поле';
+            removeButton.title = 'Remove button';
             // Remove functionality
             removeButton.addEventListener('click', () => {
                 activityContainer.remove();
