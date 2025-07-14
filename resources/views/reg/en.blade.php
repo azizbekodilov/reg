@@ -270,23 +270,12 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/ekaterina_sibaeva.png">
+                            <img src="img/feruza_ruzmatova.png">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Ekaterina Sibaeva</h4>
-                                <p>Sales Manager</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="img/dildora_mirzayakubova.png">
-                        </div>
-                        <div class="member-info">
-                            <div>
-                                <h4 class="breakText">Dildora Mirzayakubova</h4>
-                                <p>Sales Manager</p>
+                                <h4 class="breakText">Feruza Ruzmatova</h4>
+                                <p>Chief accountant</p>
                             </div>
                         </div>
                     </div>
@@ -298,6 +287,17 @@
                             <div>
                                 <h4 class="breakText">Zafar Jumaev</h4>
                                 <p>Laywer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/dildora_mirzayakubova.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Dildora Mirzayakubova</h4>
+                                <p>Sales Manager</p>
                             </div>
                         </div>
                     </div>
@@ -325,12 +325,12 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/feruza_ruzmatova.png">
+                            <img src="img/ekaterina_sibaeva.png">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Feruza Ruzmatova</h4>
-                                <p>Chief accountant</p>
+                                <h4 class="breakText">Ekaterina Sibaeva</h4>
+                                <p>Sales Manager</p>
                             </div>
                         </div>
                     </div>
@@ -347,17 +347,6 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/aziza_normatova.png">
-                        </div>
-                        <div class="member-info">
-                            <div>
-                                <h4 class="breakText">Aziza Normatova</h4>
-                                <p>Accountant 1st category</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
                             <img src="img/gulchexra.png">
                         </div>
                         <div class="member-info">
@@ -369,12 +358,34 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
+                            <img src="img/aziza_normatova.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Aziza Normatova</h4>
+                                <p>Accountant 1st category</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
                             <img src="img/hayotxon_rahimova.png">
                         </div>
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Kahyotkhon Rahimova</h4>
                                 <p>Chief accountant</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/zuhra_mirzayeva.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Zuhra Mirzaeva</h4>
+                                <p>Accountant 1st category</p>
                             </div>
                         </div>
                     </div>

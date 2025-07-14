@@ -277,23 +277,12 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/ekaterina_sibaeva.png">
+                            <img src="img/feruza_ruzmatova.png">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Екатерина Сибаева</h4>
-                                <p>Менеджер по продажам</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="img/dildora_mirzayakubova.png">
-                        </div>
-                        <div class="member-info">
-                            <div>
-                                <h4 class="breakText">Дилдора Мирзаякубова</h4>
-                                <p>Менеджер по продажам</p>
+                                <h4 class="breakText">Феруза Рузматова</h4>
+                                <p>Главный бухгалтер</p>
                             </div>
                         </div>
                     </div>
@@ -305,6 +294,17 @@
                             <div>
                                 <h4 class="breakText">Зафар Жумаев</h4>
                                 <p>Юристь</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/dildora_mirzayakubova.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Дилдора Мирзаякубова</h4>
+                                <p>Менеджер по продажам</p>
                             </div>
                         </div>
                     </div>
@@ -332,12 +332,12 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/feruza_ruzmatova.png">
+                            <img src="img/ekaterina_sibaeva.png">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Феруза Рузматова</h4>
-                                <p>Главный бухгалтер</p>
+                                <h4 class="breakText">Екатерина Сибаева</h4>
+                                <p>Менеджер по продажам</p>
                             </div>
                         </div>
                     </div>
@@ -354,17 +354,6 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/aziza_normatova.png">
-                        </div>
-                        <div class="member-info">
-                            <div>
-                                <h4 class="breakText">Азиза Норматова</h4>
-                                <p>Бухгалтер 1-ое категории</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-photo">
                             <img src="img/gulchexra.png">
                         </div>
                         <div class="member-info">
@@ -376,12 +365,34 @@
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
+                            <img src="img/aziza_normatova.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Азиза Норматова</h4>
+                                <p>Бухгалтер 1-ое категории</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
                             <img src="img/hayotxon_rahimova.png">
                         </div>
                         <div class="member-info">
                             <div>
                                 <h4 class="breakText">Хаётхон Рахимова</h4>
                                 <p>Главный бухгалтер</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="img/zuhra_mirzayeva.png">
+                        </div>
+                        <div class="member-info">
+                            <div>
+                                <h4 class="breakText">Зухра Мирзаева</h4>
+                                <p>Бухгалтер 1-ое категории</p>
                             </div>
                         </div>
                     </div>
