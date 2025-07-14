@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class RegController extends Controller
 {
@@ -17,7 +14,7 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang, $id = null, $json = null, $manager = null, $avatar = null, $customer_id = null)
+    public function index($lang, $id = null, $json = null, $manager = 1, $avatar = null, $customer_id = 1)
     {
         $id = request()->query('id');
         $customer_id = request()->query('client_id');

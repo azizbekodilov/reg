@@ -16,7 +16,7 @@
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Форма заявки для регистрации</title>
+    <title>Registration Application Form</title>
     @include('reg.style')
 </head>
 
@@ -32,11 +32,11 @@
                 </div>
                 <div style="margin-top: 1rem;text-align:center;font-size:12px">
                     {{ $manager }} <br>
-                    Обратиться за помощью <br> к менеджеру.
+                    Contact your manager <br> for assistance.
                 </div>
             </div>
             <div class="form-header">
-                <h1 class="form-title">Форма заявки для регистрации</h1>
+                <h1 class="form-title">Registration Application Form</h1>
                 <div class="form-subtitle">
                     <span class="warning-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -53,8 +53,7 @@
                         </svg>
 
                     </span>
-                    <span>Форма предназначена для внутреннего использования и заполнения данных для оформления
-                        регистрационных документов</span>
+                    <span>This form is intended for internal use and to enter data required for preparing registration documents.</span>
                 </div>
             </div>
 
@@ -63,24 +62,23 @@
                 <input type="hidden" name="customer_service_id" value="{{ $customer_id }}">
                 <!-- 1. Укажите предполагаемую организационно-правовую форму -->
                 <div class="section">
-                    <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую
-                        организационно-правовую форму</label>
+                    <label class="section-label"><span class="text-red">*</span> 1. Specify the anticipated legal form of the organization</label>
                     <select class="form-select" id="orgTypeSelect" name="organisation_type">
                         <option>Выберите организационно-правовую форму</option>
-                        <option value="1">Общество с ограниченной ответственностью (ООО)</option>
-                        <option value="2">Совместное предприятие (СП ООО)</option>
-                        <option value="3">Иностранное предприятие (ИП ООО)</option>
-                        <option value="4">Семейное предприятие (СП)</option>
-                        <option value="5">Частное предпрятие (ЧП)</option>
+                        <option value="1">Limited Liability Company (LLC)</option>
+                        <option value="2">Joint Venture (JV LLC)</option>
+                        <option value="3">Foreign Company (FC LLC)</option>
+                        <option value="4">Family Business (FB)</option>
+                        <option value="5">Private Company (PC)</option>
                     </select>
                 </div>
 
-                <!-- 2. Напишите предполагаемое фирменное наименование организации -->
+                <!-- 2. Enter the anticipated trade name of the organization -->
                 <div class="section">
-                    <label class="section-label">2. Напишите предполагаемое фирменное наименование организации</label>
+                    <label class="section-label">2. Enter the anticipated trade name of the organization</label>
                     <div class="form-note">
-                        • Необходимо указать латинскими прописными буквами<br>
-                        • Проверить свободна ли данное наименование можно через сайт <a href="https://new.birdarcha.uz/"
+                        • Must be entered in uppercase Latin letters<br>
+                        • You can check name availability at <a href="https://new.birdarcha.uz/"
                             class="image-tooltip" target="_blank">https://new.birdarcha.uz/</a>
                     </div>
                     <input type="text" class="form-input styled-input mb-2" name="company_name"
@@ -88,43 +86,43 @@
                 </div>
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
-                    <label class="section-label">3. Опишите вид деятельности</label>
+                    <label class="section-label">3. Describe the type of activity</label>
                     <input type="text" class="form-input" name="type_of_activity"
-                        placeholder="* Введите вид деятельности">
+                        placeholder="* Describe the type of activity">
                     <div id="additionalActivities"></div>
                     <button type="button" class="add-button" id="addActivityBtn">+</button>
                 </div>
 
                 <!-- 4. Укажите юридический адрес по которому будет регистрироваться фирма -->
                 <div class="section">
-                    <label class="section-label">4. Укажите юридический адрес по которому будет регистрироваться фирма
-                        (город, район, улица, дом, кв.) а так же, его кадастровый номер</label>
+                    <label class="section-label">4. pecify the legal address where the company will be registered
+                        (city, district, street, building, apartment) and the cadastral number.</label>
                     <input type="text" class="form-input" name="juridical_name"
-                        placeholder="* Введите юридический адрес" style="margin-bottom: 15px;">
+                        placeholder="* Enter address" style="margin-bottom: 15px;">
                     <input type="text" class="form-input" name="cadastral_number" id="cadastralInput"
                         placeholder="* 00:00:00:00:00:0000" maxlength="19">
                 </div>
 
                 <!-- 5. Предполагаемый налоговый режим< -->
                 <div class="section">
-                    <label class="section-label">5. Предполагаемый налоговый режим</label>
+                    <label class="section-label">5. Expected tax regime</label>
                     <div class="tax-regime-container">
                         <div class="tax-option selected" data-value="general">
                             <input type="radio" name="tax_regime" value="general" checked>
-                            <div class="tax-title">Общеустановленный налоговый режим</div>
+                            <div class="tax-title">General tax regime</div>
                             <div class="tax-description">
-                                <div>- Налог на добавленную стоимость 12%</div>
-                                <div>- Налог на прибыль 15%</div>
+                                <div>- VAT: 12%</div>
+                                <div>- Profit tax: 15%</div>
                             </div>
                         </div>
                         <div class="tax-option" data-value="simplified">
                             <input type="radio" name="tax_regime" value="simplified">
-                            <div class="tax-title">Упрощенный налоговый режим</div>
+                            <div class="tax-title">Simplified tax regime</div>
                             <div class="tax-description">
-                                Налог с оборота - 4%<br><br>
-                                Не допускается при данном налоговом режиме
-                                <div>- оборот более 1млрд сум в год</div>
-                                <div>- импорт товаров</div>
+                                Turnover tax: 4%<br><br>
+                                Not allowed if:
+                                <div>- Turnover exceeds 1 billion UZS/year</div>
+                                <div>- Importing goods</div>
                             </div>
                         </div>
                     </div>
@@ -132,24 +130,21 @@
 
                 <!-- 6. Размер Уставного фонда -->
                 <div class="section input-ustav-fond">
-                    <label class="section-label">6. Размер Уставного фонда</label>
+                    <label class="section-label">6. Authorized capital amount</label>
                     <div class="form-note">
-                        • Размер Уставного фонда указывается национальной валютой<br>
+                        • Specified in national currency<br>
                         <div id="fourMillion" class="d-none ">
-                            * Минимальный размер УФ для Иностранного и Совместного предприятия должен составлять не
-                            менее 400 млн
+                            * For foreign/joint ventures: minimum 400,000,000 UZS
                         </div>
                     </div>
                     <input type="text" id="ustavFond" class="form-input" name="capital_summa"
                         placeholder="* Введите размер уставного фонда">
-                    <div id="fourMillions" class="d-none fs-12 text-red italic"> Уставной фонд должен быть не менее
-                        400
-                        000 000 сум</div>
+                    <div id="fourMillions" class="d-none fs-12 text-red italic"> For foreign/joint ventures: minimum 400,000,000 UZS</div>
                 </div>
 
                 <!-- 7. Количество учредителей -->
                 <div class="section">
-                    <label class="section-label">7. Количество учредителей</label>
+                    <label class="section-label">7. Number of founders</label>
                     <div class="founders-grid">
                         <button type="button" class="founder-button selected" data-count="1">1</button>
                         <button type="button" class="founder-button" data-count="2">2</button>
@@ -168,47 +163,45 @@
 
                 <!-- 8. Состав учредителей -->
                 <div class="section">
-                    <label class="section-label">8. Состав учредителей и их долевое участие</label>
+                    <label class="section-label">8. Details of founders and their shares</label>
                     <div id="foundersContainer">
                         <!-- Founder sections will be dynamically generated here -->
                     </div>
                 </div>
 
-                <!-- 9. Сведения о предполагаемом Руководителе Организации: -->
+                <!-- 9. Details of the proposed Head of the Organization: -->
                 <div class="section">
-                    <label class="section-label">9. Сведения о предполагаемом Руководителе Организации:</label>
+                    <label class="section-label">9. Details of the proposed Head of the Organization:</label>
                     <div class="manager-grid">
-                        <input type="text" name="head_name" class="form-input" placeholder="* ФИО">
-                        <input type="text" name="head_phone" class="form-input" placeholder="Местный номер">
+                        <input type="text" name="head_name" class="form-input" placeholder="* Full Name">
+                        <input type="text" name="head_phone" class="form-input" placeholder="Local phone number">
                         <input type="email" name="head_mail" class="form-input"
-                            placeholder="Адрес электронной почты">
+                            placeholder="Email address">
                     </div>
                 </div>
 
-                <!-- 10. Укажите телефон и электронную почту предприятия для указания в едином гос.реестре: -->
+                <!-- 10. Company’s phone number and email for inclusion in the state register: -->
                 <div class="section">
-                    <label class="section-label">10. Укажите телефон и электронную почту предприятия для указания в
-                        едином гос.реестре:</label>
+                    <label class="section-label">10. Company’s phone number and email for inclusion in the state register:</label>
                     <div class="contact-grid">
                         <input type="tel" name="organisation_phone" class="form-input"
-                            placeholder="* Телефон номер">
-                        <input type="email" name="organisation_mail" class="form-input" placeholder="Почта">
+                            placeholder="* Phone number">
+                        <input type="email" name="organisation_mail" class="form-input" placeholder="Email address">
                     </div>
                 </div>
 
-                <!-- 11. Укажите дополнительную информацию, которую Вы считаете важно для -->
+                <!-- 11. Additional information you consider important for company registration -->
                 <div class="section">
-                    <label class="section-label">11. Укажите дополнительную информацию, которую Вы считаете важно для
-                        нас при регистрации компании:</label>
+                    <label class="section-label">11. Additional information you consider important for company registration:</label>
                     <textarea class="form-textarea" name="note" rows="4" placeholder="Введите дополнительную информацию"></textarea>
                 </div>
                 <div class="section text-red font-italic text-underline">
-                    <u>Пожалуйста, заполните все обязательные поля, отмеченные символом <b>*</b></u>
+                    <u>Please fill in all required fields marked with <b>*</b>.</u>
                 </div>
 
-                <!-- Отправить -->
+                <!-- Submit -->
                 <button type="submit" class="submit-button" id="submit">
-                    <span>Отправить
+                    <span>Submit
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -233,45 +226,45 @@
                 <div class="team-grid">
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="image.png" alt="Руслан Берекеев">
+                            <img src="image.png" alt="Ruslan Berekeev">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Руслан Берекеев</h4>
-                                <p>Генеральный директор</p>
+                                <h4 class="breakText">Ruslan Berekeev</h4>
+                                <p>General Director</p>
                             </div>
                         </div>
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/nodir_akhmedov.png" alt="Руслан Берекеев">
+                            <img src="img/nodir_akhmedov.png" alt="Nodir Akhmedov">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Нодир Ахмедов</h4>
-                                <p>Заместитель ген. директора</p>
+                                <h4 class="breakText">Nodir Akhmedov</h4>
+                                <p>Deputy General Director</p>
                             </div>
                         </div>
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/muhammad_abdulnabiev.png" alt="Руслан Берекеев">
+                            <img src="img/muhammad_abdulnabiev.png" alt="Muhammad Abdulnabiev">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Мухаммад Абдулнабиев</h4>
-                                <p>Финансовый директор</p>
+                                <h4 class="breakText">Muhammad Abdulnabiev</h4>
+                                <p>Financial Director</p>
                             </div>
                         </div>
                     </div>
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="img/jahongir_allayarov.jpg" alt="Жахонгир Аллаяров">
+                            <img src="img/jahongir_allayarov.jpg" alt="Jahongir Allayarov">
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Жахонгир Аллаяров</h4>
-                                <p>Юрист</p>
+                                <h4 class="breakText">Jahongir Allayarov</h4>
+                                <p>Lawyer</p>
                             </div>
                         </div>
                     </div>
@@ -281,8 +274,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Екатерина Сибаева</h4>
-                                <p>Менеджер по продажам</p>
+                                <h4 class="breakText">Ekaterina Sibaeva</h4>
+                                <p>Sales Manager</p>
                             </div>
                         </div>
                     </div>
@@ -292,8 +285,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Дилдора Мирзаякубова</h4>
-                                <p>Менеджер по продажам</p>
+                                <h4 class="breakText">Dildora Mirzayakubova</h4>
+                                <p>Sales Manager</p>
                             </div>
                         </div>
                     </div>
@@ -303,8 +296,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Зафар Жумаев</h4>
-                                <p>Юристь</p>
+                                <h4 class="breakText">Zafar Jumaev</h4>
+                                <p>Laywer</p>
                             </div>
                         </div>
                     </div>
@@ -314,8 +307,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Хусан Аскаров</h4>
-                                <p>Глав. бухгалтер ООО</p>
+                                <h4 class="breakText">Khusan Askarov</h4>
+                                <p>Head. accountant LLC</p>
                             </div>
                         </div>
                     </div>
@@ -325,8 +318,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Саидмурод Халилуллаев</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <h4 class="breakText">Saidmurod Khalilullaev</h4>
+                                <p>Accountant 1st category</p>
                             </div>
                         </div>
                     </div>
@@ -336,8 +329,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Феруза Рузматова</h4>
-                                <p>Главный бухгалтер</p>
+                                <h4 class="breakText">Feruza Ruzmatova</h4>
+                                <p>Chief accountant</p>
                             </div>
                         </div>
                     </div>
@@ -347,8 +340,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Азизбек Одилов</h4>
-                                <p>ИТ специалист</p>
+                                <h4 class="breakText">Azizbek Odilov</h4>
+                                <p>IT specialist</p>
                             </div>
                         </div>
                     </div>
@@ -358,8 +351,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Азиза Норматова</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <h4 class="breakText">Aziza Normatova</h4>
+                                <p>Accountant 1st category</p>
                             </div>
                         </div>
                     </div>
@@ -369,8 +362,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Гулчехра Камилова</h4>
-                                <p>Отдел кадров</p>
+                                <h4 class="breakText">Gulchexra Kamilova</h4>
+                                <p>HR manager</p>
                             </div>
                         </div>
                     </div>
@@ -380,8 +373,8 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Хаётхон Рахимова</h4>
-                                <p>Главный бухгалтер</p>
+                                <h4 class="breakText">Kahyotkhon Rahimova</h4>
+                                <p>Chief accountant</p>
                             </div>
                         </div>
                     </div>
@@ -391,15 +384,14 @@
                         </div>
                         <div class="member-info">
                             <div>
-                                <h4 class="breakText">Эъзоза Мирахматова</h4>
-                                <p>Бухгалтер 1-ое категории</p>
+                                <h4 class="breakText">Ezoza Mirakhmatova</h4>
+                                <p>Accountant 1st category</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="header-title">
-                    <h6>ВАША
-                        КОМАНДА</h6>
+                    <h6>YOURS TEAM</h6>
                 </div>
             </div>
         </div>
@@ -436,23 +428,23 @@
                 founderSection.innerHTML = `
                     <div class="founder-title">${getOrdinalInRussian(i)} учредитель</div>
                     <select class="form-select organization-form-select founder-type" name="founders[${i}][type]">
-                        <option>Выберите учредитель</option>
-                        <option value="1">Физ. лицо (резидент)</option>
-                        <option value="2">Юр лицо. (резидент)</option>
-                        <option value="3">Иностранное физ.лицо</option>
-                        <option value="4">Иностранное юр.лицо</option>
+                        <option>Select founder</option>
+                        <option value="1">Individual (resident)</option>
+                        <option value="2">Legal entity (resident)</option>
+                        <option value="3">Foreign individual</option>
+                        <option value="4">Foreign legal entity</option>
                     </select>
                     <div class="founder-grid">
                         <input type="text" class="form-input d-none" name="founders[${i}][country]" placeholder="Страна">
-                        <input type="text" class="form-input d-none" name="founders[${i}][name]" placeholder="* ФИО">
-                        <input type="text" class="form-input d-none" name="founders[${i}][names]" placeholder="* Наименование">
-                        <input type="text" class="form-input d-none" name="founders[${i}][phone]" placeholder="Местный номер (при наличии)">
-                        <input type="text" class="form-input d-none" name="founders[${i}][mail]" placeholder="Адрес электронной почты (при наличии)">
-                        <input type="text" class="form-input d-none" name="founders[${i}][contact_name]" placeholder="ФИО Представителя (директора)">
+                        <input type="text" class="form-input d-none" name="founders[${i}][name]" placeholder="* Name">
+                        <input type="text" class="form-input d-none" name="founders[${i}][names]" placeholder="* Name">
+                        <input type="text" class="form-input d-none" name="founders[${i}][phone]" placeholder="Local number (if available)">
+                        <input type="text" class="form-input d-none" name="founders[${i}][mail]" placeholder="Email address (if available)">
+                        <input type="text" class="form-input d-none" name="founders[${i}][contact_name]" placeholder="Full name of the Representative (Director)">
                         <div class="d-none block"></div>
                         <div style="width:100%;display:block">
-                            <div class="form-note d-none" id="percentName">Долевое участие (%)</div>
-                            <input type="number" class="form-input founder-share percent d-none" value="${(100 / count).toFixed(2)}" name="founders[${i}][share]" placeholder="* Долевое участие (%)" min="0" max="100">
+                            <div class="form-note d-none" id="percentName">Equity participation (%)</div>
+                            <input type="number" class="form-input founder-share percent d-none" value="${(100 / count).toFixed(2)}" name="founders[${i}][share]" placeholder="* Equity participation (%)" min="0" max="100">
                         </div>
                     </div>
                 `;
@@ -630,7 +622,7 @@
 
             foreignInputs.forEach(input => {
                 if (foreignTotal < 15) {
-                    input.alert("Суммарная доля иностранных участников в СП ООО не должны быть меньше 15%");
+                    input.alert("The total share of foreign participants in a joint venture LLC must not be less than 15%");
                     input.reportValidity();
                 } else {
                     input.setCustomValidity('');
@@ -639,7 +631,7 @@
             localInputs.forEach(input => {
                 if (localTotal > 85) {
                     input.setCustomValidity(
-                        "Суммарная доля резиденть участников в СП ООО не должны быть больше 85%");
+                        "The total share of resident participants in a joint venture LLC should not be more than 85%");
                     input.reportValidity();
                 } else {
                     input.setCustomValidity('');
@@ -663,7 +655,7 @@
                         shareInput.classList.add('is-invalid');
                         const error = document.createElement('div');
                         error.className = 'invalid-feedback';
-                        error.innerText = 'Для иностранных учредителей доля не может быть меньше 15%';
+                        error.innerText = 'For foreign founders, the share cannot be less than 15%';
                         if (!shareInput.nextElementSibling) {
                             shareInput.after(error);
                         }
@@ -676,7 +668,7 @@
                 });
                 if (!isValid) {
                     e.preventDefault();
-                    alert('Исправьте ошибки: доля иностранных учредителей должна быть не менее 15%');
+                    alert('Correct the errors: the share of foreign founders must be at least 15%');
                 }
             }
         });
@@ -718,7 +710,7 @@
             return !isNaN(value) && value <= 100;
         });
         if (!allUnderOrEqual100) {
-            alert('Максимум 100.');
+            alert('Maximum 100.');
         }
 
         function toggleFakePlaceholder(el) {
@@ -741,7 +733,7 @@
             const newInput = document.createElement('input');
             newInput.type = 'text';
             newInput.className = 'form-input';
-            newInput.placeholder = 'Введите дополнительный вид деятельности';
+            newInput.placeholder = 'Enter an additional activity';
             const removeButton = document.createElement('button');
             removeButton.type = 'button';
             removeButton.className = 'remove-button';
@@ -779,8 +771,8 @@
             if (!isValid) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Ошибка',
-                    text: 'Пожалуйста, заполните все обязательные поля.',
+                    title: 'Error',
+                    text: 'Please fill in all required fields.',
                 });
                 return;
             }
@@ -799,25 +791,25 @@
 
                     Swal.fire({
                         icon: 'success',
-                        title: 'Успешно',
-                        text: 'Ваша заявка отправлена.',
-                        confirmButtonText: 'Закрыть'
+                        title: 'Success',
+                        text: 'Your request has been sent..',
+                        confirmButtonText: 'Close'
                     });
 
                     form.reset();
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Ошибка сервера',
-                        text: 'Попробуйте позже или свяжитесь с менеджером',
+                        title: 'Server error',
+                        text: 'Try again later or contact the manager',
                     });
                 }
             } catch (error) {
                 console.error(error);
                 Swal.fire({
                     icon: 'error',
-                    title: 'Сетевая ошибка',
-                    text: 'Проверьте соединение с интернетом',
+                    title: 'Server error',
+                    text: 'Try again later or contact the manager',
                 });
             }
         });
@@ -848,18 +840,18 @@
                 .then(data => {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Уведомления отправлены вашему менеджеру!',
+                        title: 'Notifications have been sent to your manager.!',
                         text: data.message,
-                        confirmButtonText: 'Закрыть'
+                        confirmButtonText: 'Close'
                     });
                 })
                 .catch(error => {
-                    console.error('Xatolik:', error);
+                    console.error('Error:', error);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Xatolik yuz berdi!',
-                        text: 'Telegramga yuborishda muammo bo‘ldi.',
-                        confirmButtonText: 'Yopish'
+                        title: 'Error!',
+                        text: 'Notifications have been sent to your manager..',
+                        confirmButtonText: 'Close'
                     });
                 });
         }
