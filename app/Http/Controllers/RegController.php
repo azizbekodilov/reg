@@ -22,7 +22,7 @@ class RegController extends Controller
         if ($json != null) {
             # code...
             $manager = $json['name'];
-            $avatar = '/img/avatar.jpg';
+            $avatar = '/img/image.png';
             $avatar = '/img/' . $json['avatar2'];
         }
         if ($lang == "en") {
