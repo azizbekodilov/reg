@@ -64,7 +64,7 @@
                 <div class="section">
                     <label class="section-label"><span class="text-red">*</span> 1. Specify the anticipated legal form of the organization</label>
                     <select class="form-select" id="orgTypeSelect" name="organisation_type">
-                        <option>Выберите организационно-правовую форму</option>
+                        <option>Select the legal form</option>
                         <option value="1">Limited Liability Company (LLC)</option>
                         <option value="2">Joint Venture (JV LLC)</option>
                         <option value="3">Foreign Company (FC LLC)</option>
@@ -82,7 +82,7 @@
                             class="image-tooltip" target="_blank">https://new.birdarcha.uz/</a>
                     </div>
                     <input type="text" class="form-input styled-input mb-2" name="company_name"
-                        oninput="toggleFakePlaceholder(this)" placeholder="* Основное наименование">
+                        oninput="toggleFakePlaceholder(this)" placeholder="* Main name">
                 </div>
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
