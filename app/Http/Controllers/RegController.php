@@ -14,16 +14,19 @@ class RegController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang, $id = 2, $json = null, $manager = 1, $avatar = null, $customer_id = 274)
+    public function index($lang, $id = null, $json = null, $manager = 1, $avatar = null, $customer_id = null)
     {
         $id = request()->query('id');
         $customer_id = request()->query('client_id');
         $json = Http::get("https://new.legaldesk.uz/csellers/" . $id)->json();
-        if ($json != null) {
+        if ($json !== null) {
             # code...
             $manager = $json['name'];
             $avatar = '/img/image.png';
             $avatar = '/img/' . $json['avatar2'];
+        } else {
+            $id = 2;
+            $customer_id = 274;
         }
         if ($lang == "en") {
             return view('reg.en', compact('id', 'customer_id', 'manager', 'avatar'));
