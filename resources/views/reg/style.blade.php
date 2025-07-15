@@ -38,7 +38,7 @@
         color: red;
         position: absolute;
         top: 0.8rem;
-        left: 10px;
+        left: 6px;
     }
 
     .container {
