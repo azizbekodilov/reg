@@ -97,7 +97,7 @@ class RegController extends Controller
         Http::get(
             "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
             [
-                'chat_id' => -1001285835091,
+                'chat_id' => -1001239048053,
                 'text' =>  '🔔 ' . $name . '! Ваш клиент под ID ' . $customer_id . ' обращается к вам за помощью в регистрации заявки.',
             ]
         );
