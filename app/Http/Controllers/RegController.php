@@ -88,17 +88,19 @@ class RegController extends Controller
     {
         // $this->customerId = $customer_id;
         $json = Http::get("https://new.legaldesk.uz/csellers/" . $checkId)->json();
+        $customerJson = Http::get("https://new.legaldesk.uz/customer_info/" . $customer_id)->json();
         Http::post("https://new.legaldesk.uz/accept_task", [
             'customer_id' => $customer_id,
             'user_id' => $checkId,
         ]);
         $chat_id = $json['chat_id'] ?? null;
         $name = $json['name'] ?? 'Пользователь';
+        $customerName = $customerJson['name'];
         Http::get(
             "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
             [
                 'chat_id' => -1001239048053,
-                'text' =>  '🔔 ' . $name . '! Ваш клиент под ID ' . $customer_id . ' обращается к вам за помощью в регистрации заявки.',
+                'text' =>  '🔔 ' . $name . '! Ваш клиент '. $customerName .' под ID ' . $customer_id . ' обращается к вам за помощью в регистрации заявки.',
             ]
         );
         return response()->json(['message' => 'Скоро с вами свяжутся.']);
