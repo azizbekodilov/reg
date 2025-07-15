@@ -77,37 +77,50 @@
 
                 <!-- 2. Напишите предполагаемое фирменное наименование организации -->
                 <div class="section">
-                    <label class="section-label">2. Напишите предполагаемое фирменное наименование организации</label>
+                    <label class="section-label"> 2. Напишите предполагаемое фирменное наименование организации</label>
                     <div class="form-note">
                         • Необходимо указать латинскими прописными буквами<br>
                         • Проверить свободна ли данное наименование можно через сайт <a href="https://new.birdarcha.uz/"
                             class="image-tooltip" target="_blank">https://new.birdarcha.uz/</a>
                     </div>
-                    <input type="text" class="form-input styled-input mb-2" name="company_name"
-                        oninput="toggleFakePlaceholder(this)" placeholder="* Основное наименование">
+                    <div class="position-relative">
+                        <span class="input-required">*</span>
+                        <input type="text" required class="form-input styled-input mb-2" name="company_name"
+                            oninput="toggleFakePlaceholder(this)" placeholder="  Основное наименование">
+                    </div>
                 </div>
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
-                    <label class="section-label">3. Опишите вид деятельности</label>
-                    <input type="text" class="form-input" name="type_of_activity"
-                        placeholder="* Введите вид деятельности">
+                    <label class="section-label"> 3. Опишите вид деятельности</label>
+                    <div class="position-relative">
+                        <span class="input-required">*</span>
+                        <input type="text" class="form-input" name="type_of_activity"
+                            placeholder="  Введите вид деятельности">
+                    </div>
                     <div id="additionalActivities"></div>
                     <button type="button" class="add-button" id="addActivityBtn">+</button>
                 </div>
 
                 <!-- 4. Укажите юридический адрес по которому будет регистрироваться фирма -->
                 <div class="section">
-                    <label class="section-label">4. Укажите юридический адрес по которому будет регистрироваться фирма
+                    <label class="section-label"> 4. Укажите юридический адрес по которому будет регистрироваться фирма
                         (город, район, улица, дом, кв.) а так же, его кадастровый номер</label>
-                    <input type="text" class="form-input" name="juridical_name"
-                        placeholder="* Введите юридический адрес" style="margin-bottom: 15px;">
-                    <input type="text" class="form-input" name="cadastral_number" id="cadastralInput"
-                        placeholder="* 00:00:00:00:00:0000" maxlength="19">
+                    <div class="position-relative">
+                        <span class="input-required">*</span>
+                        <input type="text" class="form-input" name="juridical_name"
+                            placeholder="  Введите юридический адрес" style="margin-bottom: 15px;">
+                    </div>
+                    <div class="position-relative">
+                        <span class="input-required">*</span>
+                        <input type="text" class="form-input" name="cadastral_number" id="cadastralInput"
+                            placeholder="  00:00:00:00:00:0000" maxlength="19">
+                    </div>
                 </div>
 
                 <!-- 5. Предполагаемый налоговый режим< -->
                 <div class="section">
-                    <label class="section-label">5. Предполагаемый налоговый режим</label>
+                    <label class="section-label"><span class="text-red"></span> 5. Предполагаемый налоговый
+                        режим</label>
                     <div class="tax-regime-container">
                         <div class="tax-option selected" data-value="general">
                             <input type="radio" name="tax_regime" value="general" checked>
@@ -132,7 +145,7 @@
 
                 <!-- 6. Размер Уставного фонда -->
                 <div class="section input-ustav-fond">
-                    <label class="section-label">6. Размер Уставного фонда</label>
+                    <label class="section-label"> 6. Размер Уставного фонда</label>
                     <div class="form-note">
                         • Размер Уставного фонда указывается национальной валютой<br>
                         <div id="fourMillion" class="d-none ">
@@ -140,8 +153,11 @@
                             менее 400 млн
                         </div>
                     </div>
-                    <input type="text" id="ustavFond" class="form-input" name="capital_summa"
-                        placeholder="* Введите размер уставного фонда">
+                    <div class="position-relative">
+                        <span class="input-required">*</span>
+                        <input type="text" id="ustavFond" class="form-input" name="capital_summa"
+                            placeholder="  Введите размер уставного фонда">
+                    </div>
                     <div id="fourMillions" class="d-none fs-12 text-red italic"> Уставной фонд должен быть не менее
                         400
                         000 000 сум</div>
@@ -149,7 +165,7 @@
 
                 <!-- 7. Количество учредителей -->
                 <div class="section">
-                    <label class="section-label">7. Количество учредителей</label>
+                    <label class="section-label"><span class="text-red"></span> 7. Количество учредителей</label>
                     <div class="founders-grid">
                         <button type="button" class="founder-button selected" data-count="1">1</button>
                         <button type="button" class="founder-button" data-count="2">2</button>
@@ -168,7 +184,7 @@
 
                 <!-- 8. Состав учредителей -->
                 <div class="section">
-                    <label class="section-label">8. Состав учредителей и их долевое участие</label>
+                    <label class="section-label"> 8. Состав учредителей и их долевое участие</label>
                     <div id="foundersContainer">
                         <!-- Founder sections will be dynamically generated here -->
                     </div>
@@ -176,10 +192,16 @@
 
                 <!-- 9. Сведения о предполагаемом Руководителе Организации: -->
                 <div class="section">
-                    <label class="section-label">9. Сведения о предполагаемом Руководителе Организации:</label>
+                    <label class="section-label"> 9. Сведения о предполагаемом Руководителе Организации:</label>
                     <div class="manager-grid">
-                        <input type="text" name="head_name" class="form-input" placeholder="* ФИО">
-                        <input type="text" name="head_phone" class="form-input" placeholder="Местный номер">
+                        <div class="position-relative">
+                            <span class="input-required">*</span>
+                            <input type="text" name="head_name" class="form-input" placeholder="  ФИО">
+                        </div>
+                        <div class="position-relative">
+                            <span class="input-required">*</span>
+                            <input type="text" name="head_phone" class="form-input" placeholder="  Местный номер">
+                        </div>
                         <input type="email" name="head_mail" class="form-input"
                             placeholder="Адрес электронной почты">
                     </div>
@@ -187,18 +209,23 @@
 
                 <!-- 10. Укажите телефон и электронную почту предприятия для указания в едином гос.реестре: -->
                 <div class="section">
-                    <label class="section-label">10. Укажите телефон и электронную почту предприятия для указания в
+                    <label class="section-label"> 10. Укажите телефон и электронную почту предприятия для указания в
                         едином гос.реестре:</label>
                     <div class="contact-grid">
-                        <input type="tel" name="organisation_phone" class="form-input"
-                            placeholder="* Телефон номер">
-                        <input type="email" name="organisation_mail" class="form-input" placeholder="Почта">
+                        <div class="position-relative">
+                            <span class="input-required">*</span>
+                            <input type="tel" name="organisation_phone" class="form-input"
+                                placeholder="  Телефон номер">
+                        </div>
+                        <div>
+                            <input type="email" name="organisation_mail" class="form-input" placeholder="Почта">
+                        </div>
                     </div>
                 </div>
 
                 <!-- 11. Укажите дополнительную информацию, которую Вы считаете важно для -->
                 <div class="section">
-                    <label class="section-label">11. Укажите дополнительную информацию, которую Вы считаете важно для
+                    <label class="section-label"> 11. Укажите дополнительную информацию, которую Вы считаете важно для
                         нас при регистрации компании:</label>
                     <textarea class="form-textarea" name="note" rows="4" placeholder="Введите дополнительную информацию"></textarea>
                 </div>

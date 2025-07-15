@@ -30,6 +30,17 @@
         font-family: 'Montserrat', sans-serif;
     }
 
+    .position-relative {
+        position: relative;
+    }
+
+    .input-required {
+        color: red;
+        position: absolute;
+        top: 0.8rem;
+        left: 10px;
+    }
+
     .container {
         display: flex;
         min-height: 100vh;
@@ -108,6 +119,7 @@
 
     .section {
         margin-bottom: 20px;
+        position: relative;
     }
 
     .section-label {
@@ -494,6 +506,7 @@
     .member-photo {
         width: 50%;
         height: 100%;
+        overflow: hidden;
     }
 
     .member-photo img {
@@ -501,6 +514,10 @@
         height: 100%;
         background-size: cover;
         object-fit: cover;
+        transition: 0.3s;
+    }
+    .member-photo img:hover {
+        transform: scale(1.08);
     }
 
     .member-photo:nth-child(2) {
