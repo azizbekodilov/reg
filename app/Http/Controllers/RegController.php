@@ -95,7 +95,7 @@ class RegController extends Controller
         ]);
         $chat_id = $json['chat_id'] ?? null;
         $name = $json['name'] ?? 'Пользователь';
-        $customerName = $customerJson['name'];
+        $customerName = $customerJson['name'] ?? ' клиент';
         Http::get(
             "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
             [
