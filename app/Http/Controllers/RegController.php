@@ -51,34 +51,61 @@ class RegController extends Controller
      */
     public function store(Request $request)
     {
-        Http::get(
-            "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
-            [
-                'chat_id' => -1001877231624,
-                'text' => $request->customer_service_id,
-            ]
-        );
-        $data = Http::post("https://new.legaldesk.uz/save_data", [
-            'customer_service_id' => $request->customer_service_id,
-            'organisation_type' => $request->organisation_type,
-            'company_name' => $request->company_name,
-            'type_of_activity' => $request->type_of_activity,
-            'juridical_name' => $request->juridical_name,
-            'cadastral_number' => $request->cadastral_number,
-            'tax_regime' => $request->tax_regime,
-            'capital_summa' => $request->capital_summa,
-            'customer_service_founder' => $request->founders,
-            'head_name' => $request->head_name,
-            'head_phone' => $request->head_phone,
-            'head_mail' => $request->head_mail,
-            'organisation_phone' => $request->organisation_phone,
-            'organisation_mail' => $request->organisation_mail,
-            'note' => $request->note,
-        ]);
-        Log::info($data);
-        return response()->json([
-            'message' => $data
-        ], 200);
+        try {
+            // Отправка уведомления в Telegram
+            Http::get(
+                "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
+                [
+                    'chat_id' => -1001877231624,
+                    'text' => $request->customer_service_id,
+                ]
+            );
+
+            // Подготовка данных для отправки
+            $postData = [
+                'customer_service_id' => $request->customer_service_id,
+                'organisation_type' => $request->organisation_type,
+                'company_name' => $request->company_name,
+                'additional_company_names1' => $request->additional_company_names1,
+                'additional_company_names2' => $request->additional_company_names2,
+                'additional_company_names3' => $request->additional_company_names3,
+                'additional_company_names4' => $request->additional_company_names4,
+                'additional_company_names5' => $request->additional_company_names5,
+                'type_of_activity' => $request->type_of_activity,
+                'juridical_name' => $request->juridical_name,
+                'cadastral_number' => $request->cadastral_number,
+                'tax_regime' => $request->tax_regime,
+                'capital_summa' => $request->capital_summa,
+                'customer_service_founder' => $request->founders,
+                'head_name' => $request->head_name,
+                'head_phone' => $request->head_phone,
+                'head_mail' => $request->head_mail,
+                'organisation_phone' => $request->organisation_phone,
+                'organisation_mail' => $request->organisation_mail,
+                'note' => $request->note,
+            ];
+
+            // Отправка данных на внешний API
+            $data = Http::post("https://new.legaldesk.uz/save_data", $postData);
+
+            Log::info('Store request data:', $postData);
+            Log::info('API response:', $data->json());
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Заявка успешно отправлена',
+                'data' => $data->json()
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Store error: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Произошла ошибка при сохранении заявки',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
