@@ -88,6 +88,8 @@
                         <input type="text" required class="form-input styled-input mb-2" name="company_name"
                             oninput="toggleFakePlaceholder(this)" placeholder="  Основное наименование">
                     </div>
+                    <div id="additionalNames"></div>
+                    <button type="button" class="add-button" id="addNameBtn">+</button>
                 </div>
                 <!-- 3. Опишите вид деятельности -->
                 <div class="section">
@@ -792,6 +794,33 @@
             activityContainer.appendChild(newInput);
             activityContainer.appendChild(removeButton);
             additionalActivitiesContainer.appendChild(activityContainer);
+            // Focus on the new input
+            newInput.focus();
+        });
+
+        // Add name button functionality
+        document.getElementById('addNameBtn').addEventListener('click', () => {
+            const additionalNamesContainer = document.getElementById('additionalNames');
+            const nameContainer = document.createElement('div');
+            nameContainer.className = 'activity-input-container';
+            const newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.className = 'form-input styled-input mb-2';
+            newInput.name = 'additional_company_names[]';
+            newInput.placeholder = '  Дополнительное наименование';
+            newInput.oninput = function() { toggleFakePlaceholder(this); };
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'remove-button';
+            removeButton.innerHTML = '×';
+            removeButton.title = 'Удалить поле';
+            // Remove functionality
+            removeButton.addEventListener('click', () => {
+                nameContainer.remove();
+            });
+            nameContainer.appendChild(newInput);
+            nameContainer.appendChild(removeButton);
+            additionalNamesContainer.appendChild(nameContainer);
             // Focus on the new input
             newInput.focus();
         });
