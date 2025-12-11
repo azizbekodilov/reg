@@ -801,12 +801,26 @@
         // Add name button functionality
         document.getElementById('addNameBtn').addEventListener('click', () => {
             const additionalNamesContainer = document.getElementById('additionalNames');
+            const existingInputs = additionalNamesContainer.querySelectorAll('.activity-input-container');
+
+            // Проверяем максимальное количество полей (5)
+            if (existingInputs.length >= 5) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ограничение',
+                    text: 'Максимальное количество дополнительных наименований: 5',
+                    confirmButtonText: 'Понятно'
+                });
+                return;
+            }
+
             const nameContainer = document.createElement('div');
             nameContainer.className = 'activity-input-container';
             const newInput = document.createElement('input');
             newInput.type = 'text';
             newInput.className = 'form-input styled-input mb-2';
-            newInput.name = 'additional_company_names[]';
+            const inputIndex = existingInputs.length + 1;
+            newInput.name = `additional_company_names${inputIndex}`;
             newInput.placeholder = '  Дополнительное наименование';
             newInput.oninput = function() { toggleFakePlaceholder(this); };
             const removeButton = document.createElement('button');
@@ -817,6 +831,8 @@
             // Remove functionality
             removeButton.addEventListener('click', () => {
                 nameContainer.remove();
+                // Переименовываем оставшиеся поля
+                updateNameIndexes();
             });
             nameContainer.appendChild(newInput);
             nameContainer.appendChild(removeButton);
@@ -824,6 +840,15 @@
             // Focus on the new input
             newInput.focus();
         });
+
+        // Функция для обновления индексов имен полей
+        function updateNameIndexes() {
+            const additionalNamesContainer = document.getElementById('additionalNames');
+            const inputs = additionalNamesContainer.querySelectorAll('input[type="text"]');
+            inputs.forEach((input, index) => {
+                input.name = `additional_company_names${index + 1}`;
+            });
+        }
         // Form submission
         document.getElementById('registrationForm').addEventListener('submit', async (e) => {
             e.preventDefault();
