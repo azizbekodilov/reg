@@ -878,6 +878,12 @@
             }
 
             try {
+                // Отладка: выводим все данные формы в консоль
+                console.log('Form data being sent:');
+                for (let pair of formData.entries()) {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+
                 const response = await fetch(form.action, {
                     method: form.method || 'POST',
                     headers: {
@@ -886,22 +892,24 @@
                     body: formData,
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
+                const data = await response.json();
+                console.log('Server response:', data);
 
+                if (response.ok && data.success) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Успешно',
-                        text: 'Ваша заявка отправлена.',
+                        text: data.message || 'Ваша заявка отправлена.',
                         confirmButtonText: 'Закрыть'
                     });
 
                     form.reset();
                 } else {
+                    console.error('Server error:', data);
                     Swal.fire({
                         icon: 'error',
                         title: 'Ошибка сервера',
-                        text: 'Попробуйте позже или свяжитесь с менеджером',
+                        text: data.message || 'Попробуйте позже или свяжитесь с менеджером',
                     });
                 }
             } catch (error) {

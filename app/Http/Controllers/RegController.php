@@ -85,19 +85,38 @@ class RegController extends Controller
                 'note' => $request->note,
             ];
 
+            // Добавляем дополнительные наименования только если они не пустые
+            for ($i = 1; $i <= 5; $i++) {
+                $fieldName = "additional_company_names{$i}";
+                $value = $request->input($fieldName);
+                if (!empty(trim($value))) {
+                    $postData[$fieldName] = trim($value);
+                }
+            }
+
             // Отправка данных на внешний API
-            $data = Http::post("https://new.legaldesk.uz/save_data", $postData);
+            $response = Http::timeout(30)->post("https://new.legaldesk.uz/save_data", $postData);
 
             Log::info('Store request data:', $postData);
-            Log::info('API response:', $data->json());
+            Log::info('API response status:', $response->status());
+            Log::info('API response body:', $response->body());
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Заявка успешно отправлена',
-                'data' => $data->json()
-            ], 200);
+            if ($response->successful()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Заявка успешно отправлена',
+                    'data' => $response->json()
+                ], 200);
+            } else {
+                Log::error('API request failed with status: ' . $response->status());
+                Log::error('API error response: ' . $response->body());
 
-        } catch (\Exception $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ошибка сервера при обработке заявки',
+                    'error' => 'HTTP ' . $response->status()
+                ], 500);
+            }        } catch (\Exception $e) {
             Log::error('Store error: ' . $e->getMessage());
 
             return response()->json([
