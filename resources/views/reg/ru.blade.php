@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -892,8 +891,16 @@
                     body: formData,
                 });
 
-                const data = await response.json();
-                console.log('Server response:', data);
+                let data;
+                try {
+                    data = await response.json();
+                    console.log('Server response:', data);
+                } catch (parseError) {
+                    console.error('Failed to parse JSON response:', parseError);
+                    const text = await response.text();
+                    console.error('Raw response:', text);
+                    throw new Error('Сервер вернул некорректный ответ');
+                }
 
                 if (response.ok && data.success) {
                     Swal.fire({

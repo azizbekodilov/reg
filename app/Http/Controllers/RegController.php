@@ -52,6 +52,21 @@ class RegController extends Controller
     public function store(Request $request)
     {
         try {
+            // Базовая валидация
+            $request->validate([
+                'customer_service_id' => 'nullable',
+                'organisation_type' => 'required',
+                'company_name' => 'required|string|max:255',
+                'type_of_activity' => 'required',
+                'juridical_name' => 'required',
+                'cadastral_number' => 'required',
+                'tax_regime' => 'nullable',
+                'capital_summa' => 'nullable',
+                'head_name' => 'required',
+                'head_phone' => 'required',
+                'organisation_phone' => 'nullable',
+            ]);
+
             // Отправка уведомления в Telegram
             Http::get(
                 "https://api.telegram.org/bot6354015174:AAGLuJ6ALa51gikxxt28pZStHgzCJAB9v-4/sendMessage",
@@ -116,8 +131,18 @@ class RegController extends Controller
                     'message' => 'Ошибка сервера при обработке заявки',
                     'error' => 'HTTP ' . $response->status()
                 ], 500);
-            }        } catch (\Exception $e) {
+            }
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ошибка валидации данных',
+                'errors' => $e->errors()
+            ], 422);
+
+        } catch (\Exception $e) {
             Log::error('Store error: ' . $e->getMessage());
+            Log::error('Store error trace: ' . $e->getTraceAsString());
 
             return response()->json([
                 'success' => false,
