@@ -52,19 +52,17 @@ class RegController extends Controller
     public function store(Request $request)
     {
         try {
-            // Базовая валидация
+            // Логируем все входящие данные для отладки
+            Log::info('Incoming request data:', $request->all());
+
+            // Базовая валидация только обязательных полей
             $request->validate([
-                'customer_service_id' => 'nullable',
-                'organisation_type' => 'required',
-                'company_name' => 'required|string|max:255',
-                'type_of_activity' => 'required',
-                'juridical_name' => 'required',
-                'cadastral_number' => 'required',
-                'tax_regime' => 'nullable',
-                'capital_summa' => 'nullable',
-                'head_name' => 'required',
-                'head_phone' => 'required',
-                'organisation_phone' => 'nullable',
+                'company_name' => 'required|string',
+                'type_of_activity' => 'required|string',
+                'juridical_name' => 'required|string',
+                'cadastral_number' => 'required|string',
+                'head_name' => 'required|string',
+                'head_phone' => 'required|string',
             ]);
 
             // Отправка уведомления в Telegram
@@ -78,41 +76,47 @@ class RegController extends Controller
 
             // Подготовка данных для отправки
             $postData = [
-                'customer_service_id' => $request->customer_service_id,
-                'organisation_type' => $request->organisation_type,
-                'company_name' => $request->company_name,
-                'additional_company_names1' => $request->additional_company_names1,
-                'additional_company_names2' => $request->additional_company_names2,
-                'additional_company_names3' => $request->additional_company_names3,
-                'additional_company_names4' => $request->additional_company_names4,
-                'additional_company_names5' => $request->additional_company_names5,
-                'type_of_activity' => $request->type_of_activity,
-                'juridical_name' => $request->juridical_name,
-                'cadastral_number' => $request->cadastral_number,
-                'tax_regime' => $request->tax_regime,
-                'capital_summa' => $request->capital_summa,
-                'customer_service_founder' => $request->founders,
-                'head_name' => $request->head_name,
-                'head_phone' => $request->head_phone,
-                'head_mail' => $request->head_mail,
-                'organisation_phone' => $request->organisation_phone,
-                'organisation_mail' => $request->organisation_mail,
-                'note' => $request->note,
+                'customer_service_id' => $request->input('customer_service_id', ''),
+                'organisation_type' => $request->input('organisation_type', ''),
+                'company_name' => $request->input('company_name', ''),
+                'type_of_activity' => $request->input('type_of_activity', ''),
+                'juridical_name' => $request->input('juridical_name', ''),
+                'cadastral_number' => $request->input('cadastral_number', ''),
+                'tax_regime' => $request->input('tax_regime', 'general'),
+                'capital_summa' => $request->input('capital_summa', ''),
+                'customer_service_founder' => $request->input('founders', []),
+                'head_name' => $request->input('head_name', ''),
+                'head_phone' => $request->input('head_phone', ''),
+                'head_mail' => $request->input('head_mail', ''),
+                'organisation_phone' => $request->input('organisation_phone', ''),
+                'organisation_mail' => $request->input('organisation_mail', ''),
+                'note' => $request->input('note', ''),
             ];
 
             // Добавляем дополнительные наименования только если они не пустые
             for ($i = 1; $i <= 5; $i++) {
                 $fieldName = "additional_company_names{$i}";
                 $value = $request->input($fieldName);
-                if (!empty(trim($value))) {
+                if (!empty(trim($value ?? ''))) {
                     $postData[$fieldName] = trim($value);
                 }
             }
 
+            Log::info('Store request data:', $postData);
+
+            // Временно для тестирования - просто возвращаем успех
+            // Позже раскомментируйте код ниже для отправки на внешний API
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Заявка успешно сохранена (тестовый режим)',
+                'data' => $postData
+            ], 200);
+
+            /* 
             // Отправка данных на внешний API
             $response = Http::timeout(30)->post("https://new.legaldesk.uz/save_data", $postData);
 
-            Log::info('Store request data:', $postData);
             Log::info('API response status:', $response->status());
             Log::info('API response body:', $response->body());
 
@@ -132,6 +136,7 @@ class RegController extends Controller
                     'error' => 'HTTP ' . $response->status()
                 ], 500);
             }
+            */
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([

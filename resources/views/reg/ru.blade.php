@@ -892,14 +892,21 @@
                 });
 
                 let data;
+                const responseText = await response.text();
+
                 try {
-                    data = await response.json();
+                    data = JSON.parse(responseText);
                     console.log('Server response:', data);
                 } catch (parseError) {
                     console.error('Failed to parse JSON response:', parseError);
-                    const text = await response.text();
-                    console.error('Raw response:', text);
-                    throw new Error('Сервер вернул некорректный ответ');
+                    console.error('Raw response:', responseText);
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ошибка сервера',
+                        text: 'Сервер вернул некорректный ответ. Проверьте логи сервера.',
+                    });
+                    return;
                 }
 
                 if (response.ok && data.success) {
