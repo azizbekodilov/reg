@@ -761,7 +761,15 @@
 
         function toggleFakePlaceholder(el) {
             const placeholder = document.getElementById('fake-placeholder');
-            placeholder.style.display = el.value.length ? 'none' : 'block';
+            if (placeholder) {
+                placeholder.style.display = el.value.length ? 'none' : 'block';
+            }
+            // Дополнительная функциональность для стилизации поля
+            if (el.value.length > 0) {
+                el.classList.add('has-value');
+            } else {
+                el.classList.remove('has-value');
+            }
         }
         document.querySelectorAll('.founder-button').forEach(button => {
             button.addEventListener('click', () => {

@@ -84,6 +84,11 @@ class RegController extends Controller
                 'customer_service_id' => (int) $request->input('customer_service_id'),
                 'organisation_type' => (int) $request->input('organisation_type'),
                 'company_name' => $request->input('company_name'),
+                'additional_company_names1' => $request->input('additional_company_names1'),
+                'additional_company_names2' => $request->input('additional_company_names2'),
+                'additional_company_names3' => $request->input('additional_company_names3'),
+                'additional_company_names4' => $request->input('additional_company_names4'),
+                'additional_company_names5' => $request->input('additional_company_names5'),
                 'type_of_activity' => $combinedActivity,
                 'juridical_name' => $request->input('juridical_name'),
                 'cadastral_number' => $request->input('cadastral_number'),
@@ -121,16 +126,7 @@ class RegController extends Controller
                 }
             }
 
-            // Добавляем дополнительные наименования с ограничением длины
-            for ($i = 1; $i <= 5; $i++) {
-                $fieldName = "additional_company_names{$i}";
-                $value = $request->input($fieldName);
-                if (!empty(trim($value ?? ''))) {
-                    $postData[$fieldName] = substr(trim($value), 0, 255);
-                } else {
-                    $postData[$fieldName] = null; // nullable в БД
-                }
-            }
+            // Дополнительные наименования уже добавлены в основной массив $postData
 
             // ECP поля не нужны в save_data API, они обрабатываются отдельно
 
