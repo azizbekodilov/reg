@@ -64,7 +64,7 @@
                 <div class="section">
                     <label class="section-label"><span class="text-red">*</span> 1. Укажите предполагаемую
                         организационно-правовую форму</label>
-                    <select class="form-select" id="orgTypeSelect" name="organisation_type">
+                    <select class="form-select" id="orgTypeSelect" required name="organisation_type">
                         <option>Выберите организационно-правовую форму</option>
                         <option value="1">Общество с ограниченной ответственностью (ООО)</option>
                         <option value="2">Совместное предприятие (СП ООО)</option>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="position-relative">
                         <span class="input-required">*</span>
-                        <input type="text" required class="form-input styled-input mb-2" name="company_name"
+                        <input type="text" required class="form-input styled-input mb-2" required name="company_name"
                             oninput="toggleFakePlaceholder(this)" placeholder="  Основное наименование">
                     </div>
                     <div id="additionalNames"></div>
@@ -95,13 +95,12 @@
                     <label class="section-label"> 3. Опишите вид деятельности</label>
                     <div class="position-relative">
                         <span class="input-required">*</span>
-                        <input type="text" class="form-input" name="type_of_activity"
-                            placeholder="  Введите вид деятельности">
+                        <input type="text" required class="form-input" name="type_of_activity"
+                            placeholder=" required Введите вид деятельности">
                     </div>
                     <div id="additionalActivities"></div>
                     <button type="button" class="add-button" id="addActivityBtn">+</button>
                 </div>
-
                 <!-- 4. Укажите юридический адрес по которому будет регистрироваться фирма -->
                 <div class="section">
                     <label class="section-label"> 4. Укажите юридический адрес по которому будет регистрироваться фирма

@@ -74,22 +74,22 @@ class RegController extends Controller
                 ]
             );
 
-            // Подготовка данных для отправки
+            // Подготовка данных для отправки с правильными типами
             $postData = [
-                'customer_service_id' => $request->input('customer_service_id', ''),
-                'organisation_type' => $request->input('organisation_type', ''),
-                'company_name' => $request->input('company_name', ''),
-                'type_of_activity' => $request->input('type_of_activity', ''),
-                'juridical_name' => $request->input('juridical_name', ''),
-                'cadastral_number' => $request->input('cadastral_number', ''),
+                'customer_service_id' => (int) $request->input('customer_service_id', 0),
+                'organisation_type' => (int) $request->input('organisation_type', 1),
+                'company_name' => substr($request->input('company_name', ''), 0, 255),
+                'type_of_activity' => substr($request->input('type_of_activity', ''), 0, 255),
+                'juridical_name' => substr($request->input('juridical_name', ''), 0, 255),
+                'cadastral_number' => $request->input('cadastral_number', null),
                 'tax_regime' => $request->input('tax_regime', 'general'),
-                'capital_summa' => $request->input('capital_summa', ''),
-                'head_name' => $request->input('head_name', ''),
-                'head_phone' => $request->input('head_phone', ''),
-                'head_mail' => $request->input('head_mail', ''),
-                'organisation_phone' => $request->input('organisation_phone', ''),
-                'organisation_mail' => $request->input('organisation_mail', ''),
-                'note' => $request->input('note', ''),
+                'capital_summa' => substr($request->input('capital_summa', ''), 0, 40) ?: null,
+                'head_name' => $request->input('head_name', null),
+                'head_phone' => $request->input('head_phone', null),
+                'head_mail' => $request->input('head_mail', null),
+                'organisation_phone' => $request->input('organisation_phone', null),
+                'organisation_mail' => $request->input('organisation_mail', null),
+                'note' => $request->input('note', null),
             ];
 
             // Обрабатываем учредителей
@@ -98,20 +98,22 @@ class RegController extends Controller
                 $postData['customer_service_founder'] = $founders;
             }
 
-            // Добавляем дополнительные наименования только если они не пустые
+            // Добавляем дополнительные наименования с ограничением длины
             for ($i = 1; $i <= 5; $i++) {
                 $fieldName = "additional_company_names{$i}";
                 $value = $request->input($fieldName);
                 if (!empty(trim($value ?? ''))) {
-                    $postData[$fieldName] = trim($value);
+                    $postData[$fieldName] = substr(trim($value), 0, 255);
+                } else {
+                    $postData[$fieldName] = null; // nullable в БД
                 }
             }
 
-            // Добавляем поля для ECP (по умолчанию)
-            $postData['director_ecp_status'] = null;
-            $postData['director_ecp_updated_at'] = null;
-            $postData['director_ecp_received'] = null;
-            $postData['director_ecp_received_at'] = null;
+            // Добавляем поля для ECP согласно схеме БД
+            $postData['director_ecp_status'] = 'pending'; // enum: pending, ready, processing
+            $postData['director_ecp_received'] = false; // tinyint(1) = boolean, по умолчанию 0
+            $postData['director_ecp_received_at'] = null; // timestamp, nullable
+            $postData['director_ecp_updated_at'] = null; // timestamp, nullable
 
             Log::info('Store request data:', $postData);
 
