@@ -135,8 +135,8 @@ class RegController extends Controller
             // Отправка данных на внешний API
             $response = Http::timeout(30)->post("https://new.legaldesk.uz/save_data", $postData);
 
-            Log::info('API response status:', $response->status());
-            Log::info('API response body:', $response->body());
+            Log::info('API response status: ' . $response->status());
+            Log::info('API response body: ' . $response->body());
 
             if ($response->successful()) {
                 return response()->json([
