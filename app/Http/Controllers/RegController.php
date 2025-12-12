@@ -84,7 +84,6 @@ class RegController extends Controller
                 'cadastral_number' => $request->input('cadastral_number', ''),
                 'tax_regime' => $request->input('tax_regime', 'general'),
                 'capital_summa' => $request->input('capital_summa', ''),
-                'customer_service_founder' => $request->input('founders', []),
                 'head_name' => $request->input('head_name', ''),
                 'head_phone' => $request->input('head_phone', ''),
                 'head_mail' => $request->input('head_mail', ''),
@@ -92,6 +91,12 @@ class RegController extends Controller
                 'organisation_mail' => $request->input('organisation_mail', ''),
                 'note' => $request->input('note', ''),
             ];
+
+            // Обрабатываем учредителей
+            $founders = $request->input('founders', []);
+            if (!empty($founders) && is_array($founders)) {
+                $postData['customer_service_founder'] = $founders;
+            }
 
             // Добавляем дополнительные наименования только если они не пустые
             for ($i = 1; $i <= 5; $i++) {
@@ -102,18 +107,14 @@ class RegController extends Controller
                 }
             }
 
+            // Добавляем поля для ECP (по умолчанию)
+            $postData['director_ecp_status'] = null;
+            $postData['director_ecp_updated_at'] = null;
+            $postData['director_ecp_received'] = null;
+            $postData['director_ecp_received_at'] = null;
+
             Log::info('Store request data:', $postData);
 
-            // Временно для тестирования - просто возвращаем успех
-            // Позже раскомментируйте код ниже для отправки на внешний API
-            
-            return response()->json([
-                'success' => true,
-                'message' => 'Заявка успешно сохранена (тестовый режим)',
-                'data' => $postData
-            ], 200);
-
-            /* 
             // Отправка данных на внешний API
             $response = Http::timeout(30)->post("https://new.legaldesk.uz/save_data", $postData);
 
@@ -136,7 +137,6 @@ class RegController extends Controller
                     'error' => 'HTTP ' . $response->status()
                 ], 500);
             }
-            */
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
