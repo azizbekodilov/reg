@@ -55,14 +55,13 @@ class RegController extends Controller
             // Логируем все входящие данные для отладки
             Log::info('Incoming request data:', $request->all());
 
-            // Базовая валидация только обязательных полей
+            // Базовая валидация только обязательных полей (согласно серверной логике)
             $request->validate([
+                'customer_service_id' => 'required|integer',
+                'organisation_type' => 'required|integer',
                 'company_name' => 'required|string',
                 'type_of_activity' => 'required|string',
                 'juridical_name' => 'required|string',
-                'cadastral_number' => 'required|string',
-                'head_name' => 'required|string',
-                'head_phone' => 'required|string',
             ]);
 
             // Отправка уведомления в Telegram
@@ -74,28 +73,52 @@ class RegController extends Controller
                 ]
             );
 
-            // Подготовка данных для отправки с правильными типами
+            // Объединяем основной и дополнительные виды деятельности
+            $mainActivity = $request->input('type_of_activity', '');
+            $additionalActivities = $request->input('additional_activities', []);
+            $allActivities = array_filter(array_merge([$mainActivity], $additionalActivities));
+            $combinedActivity = implode('; ', $allActivities);
+
+            // Подготовка данных точно как ожидает серверная логика CustomerServicePdf::create()
             $postData = [
-                'customer_service_id' => (int) $request->input('customer_service_id', 0),
-                'organisation_type' => (int) $request->input('organisation_type', 1),
-                'company_name' => substr($request->input('company_name', ''), 0, 255),
-                'type_of_activity' => substr($request->input('type_of_activity', ''), 0, 255),
-                'juridical_name' => substr($request->input('juridical_name', ''), 0, 255),
-                'cadastral_number' => $request->input('cadastral_number', null),
+                'customer_service_id' => (int) $request->input('customer_service_id'),
+                'organisation_type' => (int) $request->input('organisation_type'),
+                'company_name' => $request->input('company_name'),
+                'type_of_activity' => $combinedActivity,
+                'juridical_name' => $request->input('juridical_name'),
+                'cadastral_number' => $request->input('cadastral_number'),
                 'tax_regime' => $request->input('tax_regime', 'general'),
-                'capital_summa' => substr($request->input('capital_summa', ''), 0, 40) ?: null,
-                'head_name' => $request->input('head_name', null),
-                'head_phone' => $request->input('head_phone', null),
-                'head_mail' => $request->input('head_mail', null),
-                'organisation_phone' => $request->input('organisation_phone', null),
-                'organisation_mail' => $request->input('organisation_mail', null),
-                'note' => $request->input('note', null),
+                'capital_summa' => $request->input('capital_summa'),
+                'head_name' => $request->input('head_name'),
+                'head_phone' => $request->input('head_phone'),
+                'head_mail' => $request->input('head_mail'),
+                'organisation_phone' => $request->input('organisation_phone'),
+                'organisation_mail' => $request->input('organisation_mail'),
+                'note' => $request->input('note'),
             ];
 
-            // Обрабатываем учредителей
+            // Обрабатываем учредителей - серверная логика ожидает customer_service_founder
             $founders = $request->input('founders', []);
             if (!empty($founders) && is_array($founders)) {
-                $postData['customer_service_founder'] = $founders;
+                // Очищаем и проверяем данные учредителей
+                $cleanFounders = [];
+                foreach ($founders as $founder) {
+                    if (isset($founder['type']) && !empty($founder['type'])) {
+                        $cleanFounders[] = [
+                            'type' => (int) $founder['type'], // founder_type
+                            'country' => $founder['country'] ?? '', // founder_country
+                            'name' => $founder['name'] ?? '', // founder_name (для ФИО физ.лица)
+                            'names' => $founder['names'] ?? '', // founder_participation (для наименования юр.лица)
+                            'phone' => $founder['phone'] ?? '', // founder_phone
+                            'mail' => $founder['mail'] ?? '', // founder_mail
+                            'contact_name' => $founder['contact_name'] ?? '', // founder_contact_name
+                            'share' => (float) ($founder['share'] ?? 0), // founder_share
+                        ];
+                    }
+                }
+                if (!empty($cleanFounders)) {
+                    $postData['customer_service_founder'] = $cleanFounders;
+                }
             }
 
             // Добавляем дополнительные наименования с ограничением длины
@@ -109,11 +132,7 @@ class RegController extends Controller
                 }
             }
 
-            // Добавляем поля для ECP согласно схеме БД
-            $postData['director_ecp_status'] = 'pending'; // enum: pending, ready, processing
-            $postData['director_ecp_received'] = false; // tinyint(1) = boolean, по умолчанию 0
-            $postData['director_ecp_received_at'] = null; // timestamp, nullable
-            $postData['director_ecp_updated_at'] = null; // timestamp, nullable
+            // ECP поля не нужны в save_data API, они обрабатываются отдельно
 
             Log::info('Store request data:', $postData);
 

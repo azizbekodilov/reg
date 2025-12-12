@@ -779,6 +779,7 @@
             const newInput = document.createElement('input');
             newInput.type = 'text';
             newInput.className = 'form-input';
+            newInput.name = 'additional_activities[]';
             newInput.placeholder = 'Введите дополнительный вид деятельности';
             const removeButton = document.createElement('button');
             removeButton.type = 'button';
